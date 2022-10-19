@@ -1,0 +1,18 @@
+@import "theme/constants.module.scss";
+@import "theme/mixins.scss";
+
+.footer-block {
+  display: flex;
+  justify-content: space-between;
+  color: $color-primary-bark;
+  padding-right: 10em;
+  align-items: center;
+  padding-bottom: $padding-homeContainerPadding;
+  @include fontSize-desktop-small;
+
+  ul {
+    display: flex;
+    gap: 7em;
+    list-style: none;
+  }
+}

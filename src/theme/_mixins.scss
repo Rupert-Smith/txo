@@ -1,0 +1,47 @@
+@import "./constants.module";
+
+@mixin defaultHoverTransition {
+  &:hover {
+    cursor: pointer;
+    transition: $transitions-defaultTransition;
+  }
+  &:not(:hover) {
+    transition: $transitions-defaultTransition;
+  }
+}
+
+@mixin fontSize-desktop-big {
+  font-size: $fontSize-desktop-hero;
+  line-height: $lineHeight-desktop-hero;
+  letter-spacing: $letterSpacing-desktop-hero;
+}
+
+@mixin fontSize-desktop-medium {
+  font-size: $fontSize-desktop-intro;
+  line-height: $lineHeight-desktop-intro;
+  letter-spacing: $letterSpacing-desktop-intro;
+}
+
+@mixin fontSize-desktop-small {
+  font-size: $fontSize-desktop-nav;
+  line-height: $lineHeight-desktop-nav;
+  letter-spacing: $letterSpacing-desktop-nav;
+}
+
+@mixin fontSize-mobile-big {
+  font-size: $fontSize-mobile-hero;
+  line-height: $lineHeight-mobile-hero;
+  letter-spacing: $letterSpacing-mobile-hero;
+}
+
+@mixin fontSize-mobile-medium {
+  font-size: $fontSize-mobile-intro;
+  line-height: $lineHeight-mobile-intro;
+  letter-spacing: $letterSpacing-mobile-intro;
+}
+
+@mixin fontSize-mobile-small {
+  font-size: $fontSize-mobile-footer;
+  line-height: $lineHeight-mobile-footer;
+  letter-spacing: $letterSpacing-mobile-footer;
+}

@@ -1,0 +1,61 @@
+@import "theme/constants.module.scss";
+@import "theme/mixins.scss";
+
+.form-block {
+  margin-top: 220px;
+  margin-bottom: 380px;
+
+  * {
+    color: $color-primary-bark;
+    background-color: $color-primary-cream;
+    border: 0;
+  }
+
+  h2 {
+    @include fontSize-desktop-small;
+  }
+
+  h1 {
+    @include fontSize-desktop-big;
+    margin: 0px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    gap: 0em;
+    flex-direction: column;
+  }
+
+  input {
+    @include fontSize-desktop-big;
+
+    outline-width: 0;
+    border: 0;
+    padding: 0px;
+  }
+
+  input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $color-primary-bark;
+    opacity: 0.3; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $color-primary-bark;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $color-primary-bark;
+  }
+
+  button {
+    margin-top: 40px;
+    width: fit-content;
+    @include fontSize-desktop-medium;
+    outline-width: 0;
+  }
+}

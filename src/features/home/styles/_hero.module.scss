@@ -1,0 +1,30 @@
+@import "theme/constants.module.scss";
+@import "theme/mixins.scss";
+
+.hero-block {
+  color: $color-primary-bark;
+  margin-bottom: 6em;
+}
+
+.hero-subsection {
+  margin-top: 90px;
+  margin-left: 50%;
+}
+
+.hero-title {
+  @include fontSize-desktop-big;
+  margin: 0px;
+
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  @include fontSize-desktop-small;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.hero-paragraph {
+  @include fontSize-desktop-medium;
+  margin: 0px;
+}
