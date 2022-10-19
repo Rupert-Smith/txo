@@ -57,5 +57,6 @@
     width: fit-content;
     @include fontSize-desktop-medium;
     outline-width: 0;
+    @include defaultHoverTransition;
   }
 }

@@ -23,4 +23,9 @@
 
 .read-more {
   opacity: $opacity-default;
+  @include defaultHoverTransition;
+}
+
+.read-more:hover {
+  opacity: 1;
 }
