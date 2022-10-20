@@ -5,6 +5,7 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Navigate replace to="/home" />} /> */}
         {/* <Route path="/home" element={<Home />} /> */}
       </Routes>
