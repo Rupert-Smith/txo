@@ -1,6 +1,43 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
+//------- MEDIA QUERIES ---------
+
+//------- MOBILE
+
+@media screen and (min-width: $media-query-mobile) {
+  .form-block h1 {
+    @include fontSize-mobile-big;
+  }
+  .form-block h2 {
+    @include fontSize-mobile-small;
+  }
+  .form-block input {
+    @include fontSize-mobile-big;
+  }
+  .form-block button {
+    @include fontSize-mobile-medium;
+  }
+}
+
+//------- DESKTOP
+
+@media screen and (min-width: $media-query-desktop) {
+  .form-block h1 {
+    @include fontSize-desktop-big;
+  }
+
+  .form-block h2 {
+    @include fontSize-desktop-small;
+  }
+  .form-block input {
+    @include fontSize-desktop-big;
+  }
+  .form-block button {
+    @include fontSize-desktop-medium;
+  }
+}
+
 .form-block {
   margin-top: 220px;
   margin-bottom: 380px;
@@ -11,12 +48,7 @@
     border: 0;
   }
 
-  h2 {
-    @include fontSize-desktop-small;
-  }
-
   h1 {
-    @include fontSize-desktop-big;
     margin: 0px;
     font-weight: 400;
     margin-bottom: 20px;
@@ -29,8 +61,6 @@
   }
 
   input {
-    @include fontSize-desktop-big;
-
     outline-width: 0;
     border: 0;
     padding: 0px;
@@ -55,7 +85,6 @@
   button {
     margin-top: 40px;
     width: fit-content;
-    @include fontSize-desktop-medium;
     outline-width: 0;
     @include defaultHoverTransition;
   }

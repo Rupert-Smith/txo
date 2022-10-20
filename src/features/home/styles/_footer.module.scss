@@ -1,6 +1,24 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
+//------- MEDIA QUERIES ---------
+
+//------- MOBILE
+
+@media screen and (min-width: $media-query-mobile) {
+  .footer-block {
+    @include fontSize-mobile-small;
+  }
+}
+
+//------- DESKTOP
+
+@media screen and (min-width: $media-query-desktop) {
+  .footer-block {
+    @include fontSize-desktop-small;
+  }
+}
+
 .footer-block {
   display: flex;
   justify-content: space-between;
@@ -8,7 +26,6 @@
   padding-right: 10em;
   align-items: center;
   padding-bottom: $padding-homeContainerPadding;
-  @include fontSize-desktop-small;
 
   ul {
     display: flex;

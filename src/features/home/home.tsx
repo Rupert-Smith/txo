@@ -69,6 +69,7 @@ function Header() {
           scrub: 0.1,
           start: "top top",
           end: "+=50%",
+
           // endTrigger: "section.three",
           // trigger: "#animation-trigger-txo",
         },
@@ -129,6 +130,7 @@ function EmptyScrollBlock() {
         start: "top top",
         end: "+=70%",
         scrub: true,
+        pinSpacing: false,
         // trigger: "#animation-trigger-txo",
         // trigger: "#header-items",
         // endTrigger: "section.three",
@@ -147,6 +149,7 @@ function EmptyScrollBlock() {
       endTrigger: "#fake-id", // stays in place for ever
       end: "bottom top",
       pin: "#pin-me",
+      pinSpacing: false,
       // markers: true,
     });
   }, []);
@@ -179,9 +182,9 @@ function HeroBlock() {
       {
         opacity: "1",
         scrollTrigger: {
-          scrub: 0.1,
+          scrub: 0.2,
           start: "top top",
-          end: "bottom top",
+          end: "+=100%",
           trigger: "#animation-trigger-txo",
         },
       }

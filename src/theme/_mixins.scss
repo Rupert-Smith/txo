@@ -10,6 +10,14 @@
   }
 }
 
+@mixin mq($key) {
+  $size: map-get($breakpoints, $key);
+
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
 @mixin fontSize-desktop-big {
   font-size: $fontSize-desktop-hero;
   line-height: $lineHeight-desktop-hero;

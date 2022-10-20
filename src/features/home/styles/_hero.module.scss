@@ -1,6 +1,38 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
+//------- MEDIA QUERIES ---------
+
+//------- MOBILE
+
+@media screen and (min-width: $media-query-mobile) {
+  .hero-subtitle {
+    @include fontSize-mobile-small;
+  }
+  .hero-paragraph {
+    @include fontSize-mobile-medium;
+  }
+  .hero-title {
+    @include fontSize-mobile-big;
+  }
+}
+
+//------- DESKTOP
+
+@media screen and (min-width: $media-query-desktop) {
+  .hero-subtitle {
+    @include fontSize-desktop-small;
+  }
+  .hero-paragraph {
+    @include fontSize-desktop-medium;
+  }
+  .hero-title {
+    @include fontSize-desktop-big;
+  }
+}
+
+//------- ALL DEVICES ---------
+
 .hero-block {
   color: $color-primary-bark;
   margin-bottom: 6em;
@@ -14,19 +46,15 @@
 }
 
 .hero-title {
-  @include fontSize-desktop-big;
   margin: 0px;
-
   font-weight: 400;
 }
 
 .hero-subtitle {
-  @include fontSize-desktop-small;
   margin: 0px;
   margin-bottom: 10px;
 }
 
 .hero-paragraph {
-  @include fontSize-desktop-medium;
   margin: 0px;
 }
