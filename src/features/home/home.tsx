@@ -11,8 +11,10 @@ import MeetingRoom from "assets/images/carousel_image.jpg";
 import { ReactComponent as TxoLogo } from "assets/icons/txo_logo_2.svg";
 import { ReactComponent as ThirdwayLogo } from "assets/icons/thirdway.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
 import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 function Home() {
   return (
@@ -33,7 +35,30 @@ function Home() {
 function Header() {
   const headerRef = useRef(null);
 
+  // const txoLogoRef = useRef(null);
+
   useEffect(() => {
+    // const txoLogoRefElement = txoLogoRef.current;
+
+    // gsap.to(txoLogoRefElement, {
+    //   scale: 0.5,
+    //   // pin: true,
+    //   // y: 0,
+    //   // bottom: 0,
+    //   transformOrigin: "top 20px",
+    //   scrollTrigger: {
+    //     start: "top top",
+    //     // end: "+=50%",
+    //     scrub: true,
+    //     trigger: "#header-items",
+    //     // trigger: "#header-items",
+    //     // endTrigger: "section.three",
+    //     // end: "bottom top",
+    //     pin: "#pin-me",
+    //     markers: true,
+    //   },
+    // });
+
     const element = headerRef.current;
     gsap.fromTo(
       element,
@@ -43,8 +68,9 @@ function Header() {
         scrollTrigger: {
           scrub: 0.1,
           start: "top top",
-          end: "bottom top",
-          trigger: "#animation-trigger-txo",
+          end: "+=50%",
+          // endTrigger: "section.three",
+          // trigger: "#animation-trigger-txo",
         },
       }
     );
@@ -52,63 +78,93 @@ function Header() {
 
   return (
     <header ref={headerRef} className={headerStyles["header"]}>
-      <ul>
-        <li>ENQUIRIES</li>
-        <li>General</li>
-        <li>+44 (0) 020 3613 4733</li>
-        <li>Info@txowork.com</li>
-      </ul>
-      <ul>
-        <li>&nbsp;</li>
-        <li>Sales</li>
-        <li>+44 (0) 020 3613 4733 </li>
-        <li>Info@txowork.com</li>
-      </ul>
-      <ul>
-        <li>ADDRESS</li>
-        <li>Morelands</li>
-        <li>5-23 Old Street</li>
-        <li>London EC1V 9HL</li>
-      </ul>
-      <ul>
-        <li>CONNECT</li>
-        <li>Instagram</li>
-        <li>LinkedIn</li>
-        <li>Facebook</li>
-      </ul>
+      <div
+        // id="header-items"
+        className={headerStyles["header-items"]}
+      >
+        <ul>
+          <li>ENQUIRIES</li>
+          <li>General</li>
+          <li>+44 (0) 020 3613 4733</li>
+          <li>Info@txowork.com</li>
+        </ul>
+        <ul>
+          <li>&nbsp;</li>
+          <li>Sales</li>
+          <li>+44 (0) 020 3613 4733 </li>
+          <li>Info@txowork.com</li>
+        </ul>
+        <ul>
+          <li>ADDRESS</li>
+          <li>Morelands</li>
+          <li>5-23 Old Street</li>
+          <li>London EC1V 9HL</li>
+        </ul>
+        <ul>
+          <li>CONNECT</li>
+          <li>Instagram</li>
+          <li>LinkedIn</li>
+          <li>Facebook</li>
+        </ul>
+      </div>
     </header>
   );
 }
 
 function EmptyScrollBlock() {
+  const windowHeight = useRef(document.createElement("div"));
+
   const txoLogoRef = useRef(null);
 
   useEffect(() => {
-    const element = txoLogoRef.current;
-    gsap.fromTo(
-      element,
-      { scale: "1" },
-      {
-        scale: "0.3",
-        scrollTrigger: {
-          scrub: true,
-          start: "top top",
-          end: "bottom top",
-          trigger: "#animation-trigger-txo",
-        },
-        yPercent: -240,
-        xPercent: -35,
-      }
-    );
+    const txoLogoRefElement = txoLogoRef.current;
+
+    gsap.to(txoLogoRefElement, {
+      scale: 0.3,
+      // pin: true,
+      // y: 0,
+      // bottom: 0,
+      transformOrigin: "top 20px",
+      scrollTrigger: {
+        start: "top top",
+        end: "+=70%",
+        scrub: true,
+        // trigger: "#animation-trigger-txo",
+        // trigger: "#header-items",
+        // endTrigger: "section.three",
+        // end: "bottom top",
+
+        // pin: "#pin-me",
+
+        // markers: true,
+      },
+    });
+
+    ScrollTrigger.create({
+      //   scale: 0.3,
+      trigger: "#pin-trigger",
+      start: "top top",
+      endTrigger: "#fake-id", // stays in place for ever
+      end: "bottom top",
+      pin: "#pin-me",
+      // markers: true,
+    });
   }, []);
 
   return (
-    <div
-      id="animation-trigger-txo"
-      className={emptyScrollStyles["empty-scroll-block"]}
-    >
-      <TxoLogo className={emptyScrollStyles["txo-logo"]} ref={txoLogoRef} />
-    </div>
+    <>
+      <div
+        className={emptyScrollStyles["empty-scroll-block"]}
+        ref={windowHeight}
+      />
+      <div id="pin-trigger">
+        <TxoLogo
+          id="pin-me"
+          ref={txoLogoRef}
+          className={emptyScrollStyles["txo-logo"]}
+        />
+      </div>
+    </>
   );
 }
 
@@ -134,7 +190,11 @@ function HeroBlock() {
 
   return (
     <div className={heroStyles["hero-block"]}>
-      <h1 ref={heroIntroText} className={heroStyles["hero-title"]}>
+      <h1
+        id="hero-block"
+        ref={heroIntroText}
+        className={heroStyles["hero-title"]}
+      >
         We’re hands-on and committed to evolving your business to strive for
         better.
       </h1>

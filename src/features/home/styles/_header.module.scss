@@ -1,9 +1,10 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
-.header {
+.header-items {
+  z-index: 100;
   color: $color-primary-bark;
-  z-index: 1000;
+  position: fixed;
   font-size: $fontSize-desktop-nav;
   gap: 3em;
   background-color: $color-primary-cream;
@@ -14,7 +15,6 @@
   line-height: $lineHeight-desktop-nav;
   letter-spacing: $letterSpacing-desktop-nav;
   display: flex;
-  position: fixed;
 
   ul {
     margin: 0px;
@@ -25,10 +25,10 @@
   }
 }
 
-.header ul li:nth-child(1) {
+.header-items ul li:nth-child(1) {
   padding-bottom: 8%;
 }
 
-.header ul:nth-child(4) {
+.header-items ul:nth-child(4) {
   padding-right: 10em;
 }
