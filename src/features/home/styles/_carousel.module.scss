@@ -1,6 +1,13 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
-.carousel {
-  width: 100%;
+.carousel-image {
+  cursor: none;
+}
+
+.custom-cursor {
+  z-index: 100;
+  position: absolute;
+  @include fontSize-desktop-medium;
+  color: white;
 }

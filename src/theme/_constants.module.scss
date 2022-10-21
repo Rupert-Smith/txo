@@ -48,5 +48,11 @@ $opacity-default: 0.3;
 // ----------- MEDIA QUERIES -----------
 
 $media-query-desktop: 1224px;
-$media-query-mobile: 768px;
+$media-query-tablet: 768px;
 $media-query-mobile: 480px;
+
+:export {
+  desktopWidth: $media-query-desktop;
+  tabletWidth: $media-query-tablet;
+  mobileWidth: $media-query-mobile;
+}

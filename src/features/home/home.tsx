@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import carouselStyles from "./styles/_carousel.module.scss";
 import heroStyles from "./styles/_hero.module.scss";
 import imageInfoStyles from "./styles/_image-info.module.scss";
@@ -7,12 +7,19 @@ import footerStyles from "./styles/_footer.module.scss";
 import headerStyles from "./styles/_header.module.scss";
 import emptyScrollStyles from "./styles/_empty-scroll.module.scss";
 import homeStyles from "./_home.module.scss";
-import MeetingRoom from "assets/images/carousel_image.jpg";
+import CarouselImageOne from "assets/images/carousel-images/c1.jpg";
+import CarouselImageTwo from "assets/images/carousel-images/c2.jpeg";
+import CarouselImageThree from "assets/images/carousel-images/c3.jpeg";
+import CarouselImageFour from "assets/images/carousel-images/c4.jpeg";
+import CarouselImageFive from "assets/images/carousel-images/c5.jpeg";
+import Slider from "react-slick";
 import { ReactComponent as TxoLogo } from "assets/icons/txo_logo_2.svg";
 import { ReactComponent as ThirdwayLogo } from "assets/icons/thirdway.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import gsap from "gsap";
+import variables from "theme/_constants.module.scss";
+
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -35,30 +42,7 @@ function Home() {
 function Header() {
   const headerRef = useRef(null);
 
-  // const txoLogoRef = useRef(null);
-
   useEffect(() => {
-    // const txoLogoRefElement = txoLogoRef.current;
-
-    // gsap.to(txoLogoRefElement, {
-    //   scale: 0.5,
-    //   // pin: true,
-    //   // y: 0,
-    //   // bottom: 0,
-    //   transformOrigin: "top 20px",
-    //   scrollTrigger: {
-    //     start: "top top",
-    //     // end: "+=50%",
-    //     scrub: true,
-    //     trigger: "#header-items",
-    //     // trigger: "#header-items",
-    //     // endTrigger: "section.three",
-    //     // end: "bottom top",
-    //     pin: "#pin-me",
-    //     markers: true,
-    //   },
-    // });
-
     const element = headerRef.current;
     gsap.fromTo(
       element,
@@ -69,9 +53,6 @@ function Header() {
           scrub: 0.1,
           start: "top top",
           end: "+=50%",
-
-          // endTrigger: "section.three",
-          // trigger: "#animation-trigger-txo",
         },
       }
     );
@@ -79,10 +60,7 @@ function Header() {
 
   return (
     <header ref={headerRef} className={headerStyles["header"]}>
-      <div
-        // id="header-items"
-        className={headerStyles["header-items"]}
-      >
+      <div className={headerStyles["header-items"]}>
         <ul>
           <li>ENQUIRIES</li>
           <li>General</li>
@@ -122,41 +100,28 @@ function EmptyScrollBlock() {
 
     gsap.to(txoLogoRefElement, {
       scale: 0.3,
-      // pin: true,
-      // y: 0,
-      // bottom: 0,
       transformOrigin: "top 20px",
       scrollTrigger: {
         start: "top top",
         end: "+=70%",
         scrub: true,
         pinSpacing: false,
-        // trigger: "#animation-trigger-txo",
-        // trigger: "#header-items",
-        // endTrigger: "section.three",
-        // end: "bottom top",
-
-        // pin: "#pin-me",
-
-        // markers: true,
       },
     });
 
     ScrollTrigger.create({
-      //   scale: 0.3,
       trigger: "#pin-trigger",
       start: "top top",
-      endTrigger: "#fake-id", // stays in place for ever
+      endTrigger: "#fake-id", // using a non-existent id to ensure the effect stays in place indefinitely
       end: "bottom top",
       pin: "#pin-me",
       pinSpacing: false,
-      // markers: true,
     });
   }, []);
 
   return (
     <>
-      <div
+      <section
         className={emptyScrollStyles["empty-scroll-block"]}
         ref={windowHeight}
       />
@@ -185,14 +150,13 @@ function HeroBlock() {
           scrub: 0.2,
           start: "top top",
           end: "+=100%",
-          trigger: "#animation-trigger-txo",
         },
       }
     );
   }, []);
 
   return (
-    <div className={heroStyles["hero-block"]}>
+    <section className={heroStyles["hero-block"]}>
       <h1
         id="hero-block"
         ref={heroIntroText}
@@ -209,37 +173,146 @@ function HeroBlock() {
           positive change.
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 
 function CarouselBlock() {
+  const sliderRefContainer = useRef<any>(null);
+
+  const sliderRef = useRef<any>(null);
+
+  const [carouselWidth, setCarouselWidth] = useState(0);
+
+  useEffect(() => {
+    setCarouselWidth(sliderRefContainer.current.offsetWidth);
+  }, [sliderRefContainer.current]);
+
+  const carouselImages = [
+    { description: "Modern Meeting Room", imageLink: CarouselImageOne },
+    { description: "Modern Reception", imageLink: CarouselImageTwo },
+    {
+      description: "Modern Office Space One",
+      imageLink: CarouselImageThree,
+    },
+    {
+      description: "Modern Social Space",
+      imageLink: CarouselImageFour,
+    },
+    {
+      description: "Meeting Office Space Two",
+      imageLink: CarouselImageFive,
+    },
+  ];
+
+  const [mouseOnCarousel, setMouseOnCarousel] = useState(false);
+
+  const handleMouseOnCarousel = (mouseOnCarouselUpdated: boolean) => {
+    setMouseOnCarousel(mouseOnCarouselUpdated);
+  };
+
+  const [coord, setCoord] = useState({ x: 0, y: 0 });
+  const handleMouseMove = (event: React.MouseEvent) => {
+    setCoord({ x: event.screenX, y: event.screenY });
+  };
+
+  const nextPrev = carouselWidth / 2 < coord.x;
+
+  const handleNextSlide = () => {
+    if (nextPrev) {
+      sliderRef.current.slickNext();
+    }
+    if (!nextPrev) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  document.onmousemove = function (event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    document.getElementById("#carouselSection")!.style.marginLeft = x + "px";
+    document.getElementById("#carouselSection")!.style.marginTop =
+      y - 150 + "px";
+  };
+
+  const slider_settings = {
+    className: "center",
+    dots: false,
+    infinite: true,
+    slidesToScroll: 1,
+    centerPadding: "60px",
+    slidesToShow: 1,
+    autoplay: false,
+    autoplaySpeed: 6000,
+    arrows: false,
+    speed: 500,
+    focusOnSelect: true,
+
+    responsive: [
+      {
+        breakpoint: parseInt(variables.desktopWidth, 10),
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "0px",
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <div>
-      <img
-        className={carouselStyles["carousel"]}
-        src={MeetingRoom}
-        alt="Meeting Room"
-      />
-    </div>
+    <>
+      <div
+        style={{ display: `${mouseOnCarousel ? "block" : "none"}` }}
+        className={carouselStyles["custom-cursor"]}
+        id="#carouselSection"
+      >
+        {`${nextPrev ? "Next" : "Prev"}`}
+      </div>
+      <section
+        ref={sliderRefContainer}
+        onMouseEnter={() => {
+          handleMouseOnCarousel(true);
+        }}
+        onMouseLeave={() => {
+          handleMouseOnCarousel(false);
+        }}
+        onMouseMove={handleMouseMove}
+      >
+        <Slider ref={sliderRef} {...slider_settings}>
+          {carouselImages.map((image) => {
+            return (
+              <img
+                key={image.description}
+                className={carouselStyles["carousel-image"]}
+                src={image.imageLink}
+                onClick={handleNextSlide}
+                alt={image.description}
+              />
+            );
+          })}
+        </Slider>
+      </section>
+    </>
   );
 }
 
 function ImageInfoBlock() {
   return (
-    <div className={imageInfoStyles["image-info-block"]}>
+    <section className={imageInfoStyles["image-info-block"]}>
       <div className={imageInfoStyles["image-info-name-avaliability"]}>
         <p>Name: Sample Title</p>
         <p>{`Availability: [Now]`}</p>
       </div>
       <p className={imageInfoStyles["read-more"]}>Read More</p>
-    </div>
+    </section>
   );
 }
 
 function FormBlock() {
   return (
-    <div className={formStyles["form-block"]}>
+    <section className={formStyles["form-block"]}>
       <h2>STAY UPDATED</h2>
       <form>
         <h1>Newsletter</h1>
@@ -254,13 +327,13 @@ function FormBlock() {
           Submit
         </button>
       </form>
-    </div>
+    </section>
   );
 }
 
 function Footer() {
   return (
-    <div className={footerStyles["footer-block"]}>
+    <footer className={footerStyles["footer-block"]}>
       <ThirdwayLogo />
       <ul>
         <li>Terms and Conditions</li>
@@ -268,7 +341,7 @@ function Footer() {
         <li>Cookie Policy</li>
         <li>Accessibility</li>
       </ul>
-    </div>
+    </footer>
   );
 }
 
