@@ -31,9 +31,9 @@ function Home() {
         <EmptyScrollBlock />
         <HeroBlock />
         <CarouselBlock />
-        <ImageInfoBlock />
         <FormBlock />
         <Footer />
+        <div id="page-bottom" />
       </div>
     </>
   );
@@ -112,7 +112,7 @@ function EmptyScrollBlock() {
     ScrollTrigger.create({
       trigger: "#pin-trigger",
       start: "top top",
-      endTrigger: "#fake-id", // using a non-existent id to ensure the effect stays in place indefinitely
+      endTrigger: "#page-bottom",
       end: "bottom top",
       pin: "#pin-me",
       pinSpacing: false,
@@ -181,27 +181,61 @@ function CarouselBlock() {
   const sliderRefContainer = useRef<any>(null);
 
   const sliderRef = useRef<any>(null);
+  const sliderRefText = useRef<any>(null);
 
   const [carouselWidth, setCarouselWidth] = useState(0);
+
+  const [readMoreOpen, setReadMoreOpen] = useState(false);
 
   useEffect(() => {
     setCarouselWidth(sliderRefContainer.current.offsetWidth);
   }, [sliderRefContainer.current]);
 
   const carouselImages = [
-    { description: "Modern Meeting Room", imageLink: CarouselImageOne },
-    { description: "Modern Reception", imageLink: CarouselImageTwo },
     {
-      description: "Modern Office Space One",
+      name: "Modern Meeting Room",
+      imageLink: CarouselImageOne,
+      avaliability: `[Now]`,
+      location: `[Soho]`,
+      size: `[4,200] sqft`,
+      description:
+        "Quam eos premqui tem cupta il inimet as rerum rent volum sitibus idunt la consenis ea nos doluptur, ipsapernates praeperrunte nobist peditaquis eum audaecto quam, susa consecae isto eum fugit.",
+    },
+    {
+      name: "Modern Reception",
+      imageLink: CarouselImageTwo,
+      avaliability: `[Sold]`,
+      location: `[Paris]`,
+      size: `[2,500] sqft`,
+      description:
+        "Peditaquis eum audaecto quam, susa consecae isto eum fugit. Quam eos premqui tem cupta il.",
+    },
+    {
+      name: "Modern Office Space One",
       imageLink: CarouselImageThree,
+      avaliability: `[Now]`,
+      location: `[New York]`,
+      size: `[3,000] sqft`,
+      description:
+        "Consenis ea nos doluptur, ipsapernates praeperrunte nobist peditaquis eum audaecto quam, susa consecae isto eum fugit. Quam eos premqui tem cupta il.",
     },
     {
-      description: "Modern Social Space",
+      name: "Modern Social Space",
       imageLink: CarouselImageFour,
+      avaliability: `[Now]`,
+      location: `[Cambridge]`,
+      size: `[1,100] sqft`,
+      description:
+        "Rent volum sitibus idunt la consenis ea nos doluptur, ipsapernates praeperrunte nobist peditaquis eum audaecto quam, susa consecae isto eum fugit. Quam eos premqui tem cupta il inimet as rerum. Sitibus idunt la consenis ea nos doluptur, ipsapernates praeperrunte nobist",
     },
     {
-      description: "Meeting Office Space Two",
+      name: "Meeting Office Space Two",
       imageLink: CarouselImageFive,
+      avaliability: `[Sold]`,
+      location: `[Scotland]`,
+      size: `[3,800] sqft`,
+      description:
+        "Audaecto peditaquis eum  quam, susa consecae isto eum fugit.",
     },
   ];
 
@@ -221,9 +255,11 @@ function CarouselBlock() {
   const handleNextSlide = () => {
     if (nextPrev) {
       sliderRef.current.slickNext();
+      sliderRefText.current.slickNext();
     }
     if (!nextPrev) {
       sliderRef.current.slickPrev();
+      sliderRefText.current.slickPrev();
     }
   };
 
@@ -284,29 +320,58 @@ function CarouselBlock() {
           {carouselImages.map((image) => {
             return (
               <img
-                key={image.description}
+                key={image.name}
                 className={carouselStyles["carousel-image"]}
                 src={image.imageLink}
                 onClick={handleNextSlide}
-                alt={image.description}
+                alt={image.name}
               />
+            );
+          })}
+        </Slider>
+        <Slider ref={sliderRefText} {...slider_settings}>
+          {carouselImages.map((image) => {
+            return (
+              <section
+                key={image.name}
+                className={imageInfoStyles["image-info-block"]}
+              >
+                <div
+                  className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+                >
+                  <p>{`Name: ${image.name}`}</p>
+                  <p>{`Availability:  ${image.avaliability}`}</p>
+                </div>
+                {readMoreOpen && (
+                  <>
+                    <div
+                      className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+                    >
+                      <p>{`Location: ${image.location}`}</p>
+                      <p>{`Size:  ${image.size}`}</p>
+                    </div>
+                    <div
+                      className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
+                    >
+                      <p></p>
+                      <p>{`${image.description}`}</p>
+                    </div>
+                  </>
+                )}
+                <p
+                  onClick={() => {
+                    setReadMoreOpen(!readMoreOpen);
+                  }}
+                  className={imageInfoStyles["read-more"]}
+                >
+                  {!readMoreOpen ? "Read More" : "Hide Text"}
+                </p>
+              </section>
             );
           })}
         </Slider>
       </section>
     </>
-  );
-}
-
-function ImageInfoBlock() {
-  return (
-    <section className={imageInfoStyles["image-info-block"]}>
-      <div className={imageInfoStyles["image-info-name-avaliability"]}>
-        <p>Name: Sample Title</p>
-        <p>{`Availability: [Now]`}</p>
-      </div>
-      <p className={imageInfoStyles["read-more"]}>Read More</p>
-    </section>
   );
 }
 

@@ -29,12 +29,25 @@
   }
 }
 
-.image-info-name-avaliability {
+.image-info-row {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid $color-primary-bark;
+
   p {
     width: 50%;
+  }
+}
+.image-info-row-short {
+  p {
+    width: 49%;
+    border-bottom: 1px solid $color-primary-bark;
+  }
+}
+
+.image-info-row-long {
+  border-bottom: 1px solid $color-primary-bark;
+  p {
+    width: 49%;
   }
 }
 
