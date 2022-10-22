@@ -44,9 +44,6 @@ function Header() {
   const deviceIsDesktop = useMediaQuery({
     query: `(min-width: ${variables.desktopWidth})`,
   });
-  const deviceIsMobile = useMediaQuery({
-    query: `(min-width: ${variables.mobileWidth})`,
-  });
 
   const [openHeader, setOpenHeader] = useState(false);
 
@@ -377,6 +374,10 @@ function CarouselBlock() {
     }
   };
 
+  const deviceIsDesktop = useMediaQuery({
+    query: `(min-width: ${variables.desktopWidth})`,
+  });
+
   document.onmousemove = function (event) {
     var x = event.clientX;
     var y = event.clientY;
@@ -408,7 +409,21 @@ function CarouselBlock() {
           initialSlide: 1,
         },
       },
+      {
+        breakpoint: parseInt(variables.mobilewidth, 10),
+        settings: {
+          swipeToSlide: true,
+          slidesToShow: 1,
+          centerPadding: "0px",
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
     ],
+  };
+
+  const handleTouchMove = () => {
+    handleNextSlide();
   };
 
   return (
@@ -437,7 +452,16 @@ function CarouselBlock() {
                 key={image.name}
                 className={carouselStyles["carousel-image"]}
                 src={image.imageLink}
-                onClick={handleNextSlide}
+                onClick={() => {
+                  if (deviceIsDesktop) {
+                    handleNextSlide();
+                  }
+                }}
+                onTouchMove={() => {
+                  if (!deviceIsDesktop) {
+                    handleTouchMove();
+                  }
+                }}
                 alt={image.name}
               />
             );
