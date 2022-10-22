@@ -398,6 +398,7 @@ function CarouselBlock() {
     arrows: false,
     speed: 500,
     focusOnSelect: true,
+    swipeToSlide: true,
 
     responsive: [
       {
@@ -466,21 +467,21 @@ function CarouselBlock() {
                     handleNextSlide();
                   }
                 }}
-                onTouchMove={(event) => {
-                  if (!deviceIsDesktop) {
-                    handleTouchMove(event);
-                  }
-                }}
-                onTouchStart={(event) => {
-                  if (!deviceIsDesktop) {
-                    handleTouchStart(event);
-                  }
-                }}
-                onTouchEnd={(event) => {
-                  if (!deviceIsDesktop) {
-                    handleTouchEnd(event);
-                  }
-                }}
+                // onTouchMove={(event) => {
+                //   if (!deviceIsDesktop) {
+                //     handleTouchMove(event);
+                //   }
+                // }}
+                // onTouchStart={(event) => {
+                //   if (!deviceIsDesktop) {
+                //     handleTouchStart(event);
+                //   }
+                // }}
+                // onTouchEnd={(event) => {
+                //   if (!deviceIsDesktop) {
+                //     handleTouchEnd(event);
+                //   }
+                // }}
                 alt={image.name}
               />
             );
