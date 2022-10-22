@@ -25,27 +25,39 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
 
 function Home() {
+  const [openMobileHeader, setOpenMobileHeader] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header
+        setOpenMobileHeader={setOpenMobileHeader}
+        openMobileHeader={openMobileHeader}
+      />
       <div className={homeStyles["home-container"]}>
         <EmptyScrollBlock />
-        <HeroBlock />
-        <CarouselBlock />
-        <FormBlock />
-        <Footer />
+        {openMobileHeader && (
+          <>
+            <HeroBlock />
+            <CarouselBlock />
+            <FormBlock />
+            <Footer />
+          </>
+        )}
         <div id="page-bottom" />
       </div>
     </>
   );
 }
 
-function Header() {
+type HeaderProps = {
+  openMobileHeader: boolean;
+  setOpenMobileHeader: Function;
+};
+
+function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
   const deviceIsDesktop = useMediaQuery({
     query: `(min-width: ${variables.desktopWidth})`,
   });
-
-  const [openHeader, setOpenHeader] = useState(false);
 
   const headerRef = useRef(null);
   const headerRefMobile = useRef(null);
@@ -140,10 +152,10 @@ function Header() {
           <header className={`${headerStyles["mobile-header-container"]}`}>
             <div
               onClick={() => {
-                setOpenHeader(!openHeader);
+                setOpenMobileHeader(!openMobileHeader);
               }}
               className={`${headerStyles["mobile-header-button"]} ${
-                openHeader ? headerStyles["open"] : ""
+                openMobileHeader ? headerStyles["open"] : ""
               }`}
             >
               <span />
@@ -152,7 +164,7 @@ function Header() {
               <span />
             </div>
           </header>
-          {openHeader && (
+          {openMobileHeader && (
             <div className={`${headerStyles["mobile-header-list"]}`}>
               {headerItems.map((item) => {
                 return (
