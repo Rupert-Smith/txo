@@ -409,22 +409,31 @@ function CarouselBlock() {
           initialSlide: 1,
         },
       },
-      {
-        breakpoint: parseInt(variables.mobilewidth, 10),
-        settings: {
-          swipeToSlide: true,
-          slidesToShow: 1,
-          centerPadding: "0px",
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
     ],
   };
 
-  const handleTouchMove = () => {
-    handleNextSlide();
-  };
+  const [touchStart, setTouchStart] = React.useState(0);
+  const [touchEnd, setTouchEnd] = React.useState(0);
+
+  function handleTouchStart(e: React.TouchEvent) {
+    setTouchStart(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchMove(e: React.TouchEvent) {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStart - touchEnd > 150) {
+      sliderRef.current.slickPrev();
+      sliderRefText.current.slickPrev();
+    }
+
+    if (touchStart - touchEnd < -150) {
+      sliderRef.current.slickNext();
+      sliderRefText.current.slickNext();
+    }
+  }
 
   return (
     <>
@@ -457,11 +466,13 @@ function CarouselBlock() {
                     handleNextSlide();
                   }
                 }}
-                onTouchMove={() => {
+                onTouchMove={(event) => {
                   if (!deviceIsDesktop) {
-                    handleTouchMove();
+                    handleTouchMove(event);
                   }
                 }}
+                onTouchStart={(event) => handleTouchStart(event)}
+                onTouchEnd={(event) => handleTouchEnd(event)}
                 alt={image.name}
               />
             );
