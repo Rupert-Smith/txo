@@ -471,8 +471,16 @@ function CarouselBlock() {
                     handleTouchMove(event);
                   }
                 }}
-                onTouchStart={(event) => handleTouchStart(event)}
-                onTouchEnd={(event) => handleTouchEnd(event)}
+                onTouchStart={(event) => {
+                  if (!deviceIsDesktop) {
+                    handleTouchStart(event);
+                  }
+                }}
+                onTouchEnd={(event) => {
+                  if (!deviceIsDesktop) {
+                    handleTouchEnd(event);
+                  }
+                }}
                 alt={image.name}
               />
             );
