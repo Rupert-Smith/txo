@@ -19,6 +19,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import gsap from "gsap";
 import variables from "theme/_constants.module.scss";
+import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
@@ -40,12 +41,35 @@ function Home() {
 }
 
 function Header() {
+  const deviceIsDesktop = useMediaQuery({
+    query: `(min-width: ${variables.desktopWidth})`,
+  });
+  const deviceIsMobile = useMediaQuery({
+    query: `(min-width: ${variables.mobileWidth})`,
+  });
+
+  const [openHeader, setOpenHeader] = useState(false);
+
   const headerRef = useRef(null);
+  const headerRefMobile = useRef(null);
 
   useEffect(() => {
-    const element = headerRef.current;
+    const headerRefElement = headerRef.current;
+    const headerRefMobileElement = headerRefMobile.current;
     gsap.fromTo(
-      element,
+      headerRefElement,
+      { opacity: "0" },
+      {
+        opacity: "1",
+        scrollTrigger: {
+          scrub: 0.1,
+          start: "top top",
+          end: "+=50%",
+        },
+      }
+    );
+    gsap.fromTo(
+      headerRefMobileElement,
       { opacity: "0" },
       {
         opacity: "1",
@@ -58,35 +82,125 @@ function Header() {
     );
   }, []);
 
+  const headerItems = [
+    {
+      title: "ENQUIRIES",
+      rowOne: "General",
+      rowTwo: "+44 (0) 020 3613 4733",
+      rowThree: "Info@txowork.com",
+      mobileLineBreakBottom: false,
+      mobileLineBreakTop: true,
+    },
+    {
+      key: "itemTwo",
+      title: <br />,
+      rowOne: "Sales",
+      rowTwo: "+44 (0) 020 3613 4733",
+      rowThree: "Info@txowork.com",
+      mobileLineBreakBottom: true,
+      mobileLineBreakTop: false,
+    },
+    {
+      key: "itemThree",
+      title: "ADDRESS",
+      rowOne: "Morelands",
+      rowTwo: "5-23 Old Street",
+      rowThree: "London EC1V 9HL",
+      mobileLineBreakBottom: true,
+      mobileLineBreakTop: false,
+    },
+    {
+      key: "itemFour",
+      title: "CONNECT",
+      rowOne: "Instagram",
+      rowTwo: "LinkedIn",
+      rowThree: "Facebook",
+      mobileLineBreakBottom: true,
+      mobileLineBreakTop: false,
+    },
+  ];
+
   return (
-    <header ref={headerRef} className={headerStyles["header"]}>
-      <div className={headerStyles["header-items"]}>
-        <ul>
-          <li>ENQUIRIES</li>
-          <li>General</li>
-          <li>+44 (0) 020 3613 4733</li>
-          <li>Info@txowork.com</li>
-        </ul>
-        <ul>
-          <li>&nbsp;</li>
-          <li>Sales</li>
-          <li>+44 (0) 020 3613 4733 </li>
-          <li>Info@txowork.com</li>
-        </ul>
-        <ul>
-          <li>ADDRESS</li>
-          <li>Morelands</li>
-          <li>5-23 Old Street</li>
-          <li>London EC1V 9HL</li>
-        </ul>
-        <ul>
-          <li>CONNECT</li>
-          <li>Instagram</li>
-          <li>LinkedIn</li>
-          <li>Facebook</li>
-        </ul>
-      </div>
-    </header>
+    <>
+      {deviceIsDesktop && (
+        <header ref={headerRef} className={headerStyles["header"]}>
+          <div className={headerStyles["header-items"]}>
+            {headerItems.map((item) => {
+              return (
+                <ul key={item.key}>
+                  <li>{item.title}</li>
+                  <li>{item.rowOne}</li>
+                  <li>{item.rowTwo}</li>
+                  <li>{item.rowThree}</li>
+                </ul>
+              );
+            })}
+          </div>
+        </header>
+      )}
+      {!deviceIsDesktop && (
+        <div ref={headerRefMobile}>
+          <header className={`${headerStyles["mobile-header-container"]}`}>
+            <div
+              onClick={() => {
+                setOpenHeader(!openHeader);
+              }}
+              className={`${headerStyles["mobile-header-button"]} ${
+                openHeader ? headerStyles["open"] : ""
+              }`}
+            >
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </header>
+          {openHeader && (
+            <div className={`${headerStyles["mobile-header-list"]}`}>
+              {headerItems.map((item) => {
+                return (
+                  <ul key={item.key}>
+                    {item.mobileLineBreakTop && (
+                      <li
+                        className={`${headerStyles["mobile-header-line-break-top"]}`}
+                      />
+                    )}
+                    <li
+                      className={`${headerStyles["header-mobile-list-small-font"]}`}
+                    />
+                    <li
+                      className={`${headerStyles["header-mobile-title"]} ${headerStyles["header-mobile-list-small-font"]}`}
+                    >
+                      {item.title}
+                    </li>
+                    <li
+                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                    >
+                      {item.rowOne}
+                    </li>
+                    <li
+                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                    >
+                      {item.rowTwo}
+                    </li>
+                    <li
+                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                    >
+                      {item.rowThree}
+                    </li>
+                    {item.mobileLineBreakBottom && (
+                      <li
+                        className={`${headerStyles["mobile-header-line-break-bottom"]}`}
+                      />
+                    )}
+                  </ul>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 
