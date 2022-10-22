@@ -437,7 +437,7 @@ function CarouselBlock() {
                 key={image.name}
                 className={carouselStyles["carousel-image"]}
                 src={image.imageLink}
-                // onClick={handleNextSlide}
+                onClick={handleNextSlide}
                 alt={image.name}
               />
             );
