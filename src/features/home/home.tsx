@@ -19,6 +19,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import gsap from "gsap";
 import variables from "theme/_constants.module.scss";
+import { RemoveScroll } from "react-remove-scroll";
 import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -30,20 +31,18 @@ function Home() {
   return (
     <>
       <Header
-        setOpenMobileHeader={setOpenMobileHeader}
         openMobileHeader={openMobileHeader}
+        setOpenMobileHeader={setOpenMobileHeader}
       />
       <div className={homeStyles["home-container"]}>
-        <EmptyScrollBlock />
-        {openMobileHeader && (
-          <>
-            <HeroBlock />
-            <CarouselBlock />
-            <FormBlock />
-            <Footer />
-          </>
-        )}
-        <div id="page-bottom" />
+        <div className={openMobileHeader ? homeStyles["hide"] : ""}>
+          <EmptyScrollBlock openMobileHeader={openMobileHeader} />
+          <HeroBlock />
+          <CarouselBlock />
+          <FormBlock />
+          <Footer />
+          <div id="page-bottom" />
+        </div>
       </div>
     </>
   );
@@ -150,6 +149,9 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
       {!deviceIsDesktop && (
         <div ref={headerRefMobile}>
           <header className={`${headerStyles["mobile-header-container"]}`}>
+            {openMobileHeader && (
+              <TxoLogo className={headerStyles["txo-logo"]} />
+            )}
             <div
               onClick={() => {
                 setOpenMobileHeader(!openMobileHeader);
@@ -165,47 +167,49 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
             </div>
           </header>
           {openMobileHeader && (
-            <div className={`${headerStyles["mobile-header-list"]}`}>
-              {headerItems.map((item) => {
-                return (
-                  <ul key={item.key}>
-                    {item.mobileLineBreakTop && (
+            <RemoveScroll>
+              <div className={`${headerStyles["mobile-header-list"]}`}>
+                {headerItems.map((item) => {
+                  return (
+                    <ul key={item.key}>
+                      {item.mobileLineBreakTop && (
+                        <li
+                          className={`${headerStyles["mobile-header-line-break-top"]}`}
+                        />
+                      )}
                       <li
-                        className={`${headerStyles["mobile-header-line-break-top"]}`}
+                        className={`${headerStyles["header-mobile-list-small-font"]}`}
                       />
-                    )}
-                    <li
-                      className={`${headerStyles["header-mobile-list-small-font"]}`}
-                    />
-                    <li
-                      className={`${headerStyles["header-mobile-title"]} ${headerStyles["header-mobile-list-small-font"]}`}
-                    >
-                      {item.title}
-                    </li>
-                    <li
-                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
-                    >
-                      {item.rowOne}
-                    </li>
-                    <li
-                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
-                    >
-                      {item.rowTwo}
-                    </li>
-                    <li
-                      className={`${headerStyles["header-mobile-list-medium-font"]}`}
-                    >
-                      {item.rowThree}
-                    </li>
-                    {item.mobileLineBreakBottom && (
                       <li
-                        className={`${headerStyles["mobile-header-line-break-bottom"]}`}
-                      />
-                    )}
-                  </ul>
-                );
-              })}
-            </div>
+                        className={`${headerStyles["header-mobile-title"]} ${headerStyles["header-mobile-list-small-font"]}`}
+                      >
+                        {item.title}
+                      </li>
+                      <li
+                        className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                      >
+                        {item.rowOne}
+                      </li>
+                      <li
+                        className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                      >
+                        {item.rowTwo}
+                      </li>
+                      <li
+                        className={`${headerStyles["header-mobile-list-medium-font"]}`}
+                      >
+                        {item.rowThree}
+                      </li>
+                      {item.mobileLineBreakBottom && (
+                        <li
+                          className={`${headerStyles["mobile-header-line-break-bottom"]}`}
+                        />
+                      )}
+                    </ul>
+                  );
+                })}
+              </div>
+            </RemoveScroll>
           )}
         </div>
       )}
@@ -213,7 +217,11 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
   );
 }
 
-function EmptyScrollBlock() {
+type EmptyScrollBlockProps = {
+  openMobileHeader: boolean;
+};
+
+function EmptyScrollBlock({ openMobileHeader }: EmptyScrollBlockProps) {
   const windowHeight = useRef(document.createElement("div"));
 
   const txoLogoRef = useRef(null);
@@ -248,7 +256,10 @@ function EmptyScrollBlock() {
         className={emptyScrollStyles["empty-scroll-block"]}
         ref={windowHeight}
       />
-      <div id="pin-trigger">
+      <div
+        id="pin-trigger"
+        className={openMobileHeader ? homeStyles["hide"] : ""}
+      >
         <TxoLogo
           id="pin-me"
           ref={txoLogoRef}

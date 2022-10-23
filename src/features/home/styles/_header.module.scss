@@ -155,7 +155,7 @@
   background-color: $color-primary-cream;
   width: 100%;
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   height: 100vh;
 
   ul {
@@ -186,4 +186,12 @@
 
 .header-mobile-title {
   margin-bottom: 1em;
+}
+
+.txo-logo {
+  height: 5em;
+  width: 10.5em;
+  left: 3.4em;
+  position: absolute;
+  top: 2.4em;
 }
