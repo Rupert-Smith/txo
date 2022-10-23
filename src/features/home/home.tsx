@@ -22,6 +22,7 @@ import variables from "theme/_constants.module.scss";
 import { RemoveScroll } from "react-remove-scroll";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
+import { fontSize } from "@mui/system";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
@@ -376,25 +377,23 @@ function CarouselBlock() {
 
   const [mouseOnCarousel, setMouseOnCarousel] = useState(false);
 
-  const handleMouseOnCarousel = (mouseOnCarouselUpdated: boolean) => {
-    setMouseOnCarousel(mouseOnCarouselUpdated);
-  };
+  // const [coord, setCoord] = useState({ x: 0, y: 0 });
+  // const handleMouseMove = (event: React.MouseEvent) => {
+  //   setCoord({ x: event.screenX, y: event.screenY });
+  // };
 
-  const [coord, setCoord] = useState({ x: 0, y: 0 });
-  const handleMouseMove = (event: React.MouseEvent) => {
-    setCoord({ x: event.screenX, y: event.screenY });
-  };
+  const [nextPrev, setNextPrev] = useState(false);
 
-  const nextPrev = carouselWidth / 2 < coord.x;
+  // let nextPrev = ;
 
   const handleNextSlide = () => {
     if (nextPrev) {
       sliderRef.current.slickNext();
-      sliderRefText.current.slickNext();
+      // sliderRefText.current.slickNext();
     }
     if (!nextPrev) {
       sliderRef.current.slickPrev();
-      sliderRefText.current.slickPrev();
+      // sliderRefText.current.slickPrev();
     }
   };
 
@@ -402,13 +401,86 @@ function CarouselBlock() {
     query: `(min-width: ${variables.desktopWidth})`,
   });
 
-  document.onmousemove = function (event) {
-    var x = event.clientX;
-    var y = event.clientY;
-    document.getElementById("#carouselSection")!.style.marginLeft = x + "px";
-    document.getElementById("#carouselSection")!.style.marginTop =
-      y - 150 + "px";
+  document.onmousemove = function (e) {
+    const rect = document
+      .getElementById("carouselSection")!
+      .getBoundingClientRect();
+    var x = e.clientX - rect.left; //x position within the element.
+    var y = e.clientY - rect.top; //y position within the element.
+    setNextPrev(window.outerWidth / 2 < x);
+
+    document.getElementById("carouselCursor")!.style.marginLeft = x + "px";
+    document.getElementById("carouselCursor")!.style.marginTop = y + "px";
   };
+
+  // document.getElementById("carouselSection").onclick = function clickEvent(
+  //   e
+  // ) {
+  //   // e = Mouse click event.
+  //   var rect = e.target.getBoundingClientRect();
+  //   var x = e.clientX - rect.left; //x position within the element.
+  //   var y = e.clientY - rect.top; //y position within the element.
+  //   console.log("Left? : " + x + " ; Top? : " + y + ".");
+  // };
+
+  /////////----------------
+  // useEffect(() => {
+  //   dragElement(document.getElementById("carouselSection"));
+  // }, []);
+
+  // function dragElement(elmnt: any) {
+  //   var pos1 = 0,
+  //     pos2 = 0,
+  //     pos3 = 0,
+  //     pos4 = 0;
+
+  //   // console.log(pos1);
+  //   // console.log(pos2);
+  //   // console.log(pos3);
+  //   // console.log(pos4);
+  //   // if (document.getElementById(elmnt.id + "header")) {
+  //   //   /* if present, the header is where you move the DIV from:*/
+  //   //   document.getElementById(elmnt.id + "header").onmouseover = dragMouseDown;
+  //   // } else {
+  //   /* otherwise, move the DIV from anywhere inside the DIV:*/
+  //   elmnt.onmouseover = dragMouseDown;
+  //   // }
+
+  //   function dragMouseDown(e: any) {
+  //     e = e || window.event;
+  //     e.preventDefault();
+  //     // get the mouse cursor position at startup:
+
+  //     pos3 = e.clientX;
+  //     pos4 = e.clientY;
+  //     document.onmouseup = closeDragElement;
+  //     // call a function whenever the cursor moves:
+  //     document.onmousemove = elementDrag;
+  //   }
+
+  //   function elementDrag(e: any) {
+  //     e = e || window.event;
+  //     e.preventDefault();
+  //     // calculate the new cursor position:
+  //     pos1 = pos3 - e.clientX;
+  //     pos2 = pos4 - e.clientY;
+  //     pos3 = e.clientX;
+  //     pos4 = e.clientY;
+
+  //     const cursorElement: any = document.getElementById("carouselCursor");
+  //     console.log(cursorElement);
+  //     // set the element's new position:
+  //     cursorElement.style.top = cursorElement.offsetTop - pos1 + "px";
+  //     cursorElement.style.left = cursorElement.offsetLeft - pos2 + "px";
+  //   }
+
+  //   function closeDragElement() {
+  //     /* stop moving when mouse button is released:*/
+  //     document.onmouseup = null;
+  //     document.onmousemove = null;
+  //   }
+  // }
+  // /////////----------------
 
   const [carouselImagesFiltered, setCarouselImagesFiltered] = useState(
     carouselImages[0]
@@ -446,81 +518,79 @@ function CarouselBlock() {
 
   return (
     <>
-      {deviceIsDesktop && (
-        <div
-          style={{ display: `${mouseOnCarousel ? "block" : "none"}` }}
-          className={carouselStyles["custom-cursor"]}
-          id="#carouselSection"
-        >
-          {`${nextPrev ? "Next" : "Prev"}`}
-        </div>
-      )}
       <section
+        onClick={() => {
+          if (deviceIsDesktop) {
+            handleNextSlide();
+          }
+        }}
+        className={carouselStyles["carousel-image"]}
+        id="carouselSection"
         ref={sliderRefContainer}
         onMouseEnter={() => {
-          handleMouseOnCarousel(true);
+          setMouseOnCarousel((state) => !state);
         }}
         onMouseLeave={() => {
-          handleMouseOnCarousel(false);
+          setMouseOnCarousel((state) => !state);
         }}
-        onMouseMove={handleMouseMove}
+        // onMouseMove={handleMouseMove}
       >
+        {deviceIsDesktop && (
+          <div
+            style={{ display: `${mouseOnCarousel ? "block" : "none"}` }}
+            className={carouselStyles["custom-cursor"]}
+            id="carouselCursor"
+          >
+            {`${nextPrev ? "Next" : "Prev"}`}
+          </div>
+        )}
+
         <Slider ref={sliderRef} {...slider_settings}>
           {carouselImages.map((image) => {
             return (
-              <img
-                key={image.name}
-                className={carouselStyles["carousel-image"]}
-                src={image.imageLink}
-                onClick={() => {
-                  if (deviceIsDesktop) {
-                    handleNextSlide();
-                  }
-                }}
-                alt={image.name}
-              />
+              <img key={image.name} src={image.imageLink} alt={image.name} />
             );
           })}
         </Slider>
         {/* <Slider ref={sliderRefText} {...slider_settings}>
           {carouselImages.map((image) => {
             return ( */}
-        <section
-          key={carouselImagesFiltered.name}
-          className={imageInfoStyles["image-info-block"]}
-        >
-          <div
-            className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
-          >
-            <p>{`Name: ${carouselImagesFiltered.name}`}</p>
-            <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
-          </div>
-          {readMoreOpen && (
-            <>
-              <div
-                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
-              >
-                <p>{`Location: ${carouselImagesFiltered.location}`}</p>
-                <p>{`Size:  ${carouselImagesFiltered.size}`}</p>
-              </div>
-              <div
-                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
-              >
-                <p></p>
-                <p>{`${carouselImagesFiltered.description}`}</p>
-              </div>
-            </>
-          )}
-          <p
-            onClick={() => {
-              setReadMoreOpen(!readMoreOpen);
-            }}
-            className={imageInfoStyles["read-more"]}
-          >
-            {!readMoreOpen ? "Read More" : "Hide Text"}
-          </p>
-        </section>
       </section>
+      <div
+        key={carouselImagesFiltered.name}
+        className={imageInfoStyles["image-info-block"]}
+      >
+        <div
+          className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+        >
+          <p>{`Name: ${carouselImagesFiltered.name}`}</p>
+          <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
+        </div>
+        {readMoreOpen && (
+          <>
+            <div
+              className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+            >
+              <p>{`Location: ${carouselImagesFiltered.location}`}</p>
+              <p>{`Size:  ${carouselImagesFiltered.size}`}</p>
+            </div>
+            <div
+              className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
+            >
+              <p></p>
+              <p>{`${carouselImagesFiltered.description}`}</p>
+            </div>
+          </>
+        )}
+        <p
+          onClick={() => {
+            setReadMoreOpen(!readMoreOpen);
+          }}
+          className={imageInfoStyles["read-more"]}
+        >
+          {!readMoreOpen ? "Read More" : "Hide Text"}
+        </p>
+      </div>
     </>
   );
 }
