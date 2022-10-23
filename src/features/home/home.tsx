@@ -446,13 +446,15 @@ function CarouselBlock() {
 
   return (
     <>
-      <div
-        style={{ display: `${mouseOnCarousel ? "block" : "none"}` }}
-        className={carouselStyles["custom-cursor"]}
-        id="#carouselSection"
-      >
-        {`${nextPrev ? "Next" : "Prev"}`}
-      </div>
+      {deviceIsDesktop && (
+        <div
+          style={{ display: `${mouseOnCarousel ? "block" : "none"}` }}
+          className={carouselStyles["custom-cursor"]}
+          id="#carouselSection"
+        >
+          {`${nextPrev ? "Next" : "Prev"}`}
+        </div>
+      )}
       <section
         ref={sliderRefContainer}
         onMouseEnter={() => {
