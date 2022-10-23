@@ -6,6 +6,15 @@
 //------- MOBILE
 
 @media screen and (min-width: $media-query-mobile) {
+  .form-block form {
+    margin-left: -5px;
+
+    button {
+      padding: 0px;
+      padding-left: 6px;
+    }
+  }
+
   .form-block h1 {
     @include fontSize-mobile-big;
   }
@@ -23,6 +32,14 @@
 //------- DESKTOP
 
 @media screen and (min-width: $media-query-desktop) {
+  .form-block form {
+    margin-left: -10px;
+
+    button {
+      padding-left: 10px;
+    }
+  }
+
   .form-block h1 {
     @include fontSize-desktop-big;
   }
@@ -87,5 +104,9 @@
     width: fit-content;
     outline-width: 0;
     @include defaultHoverTransition;
+  }
+
+  button:hover {
+    color: $color-primary-bark-hover;
   }
 }

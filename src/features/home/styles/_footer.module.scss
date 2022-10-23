@@ -6,7 +6,17 @@
 //------- MOBILE
 
 @media screen and (min-width: $media-query-mobile) {
+  .third-way-logo {
+    position: absolute;
+    margin-top: -5em;
+    margin-left: -0.3em;
+    width: 10em;
+  }
+
   .footer-block {
+    ul {
+      margin-left: -4em;
+    }
     @include fontSize-mobile-small;
   }
 }
@@ -14,6 +24,13 @@
 //------- DESKTOP
 
 @media screen and (min-width: $media-query-desktop) {
+  .third-way-logo {
+    position: relative;
+    margin-top: 0em;
+    margin-left: 0em;
+    width: 10em;
+  }
+
   .footer-block {
     @include fontSize-desktop-small;
   }
@@ -31,5 +48,13 @@
     display: flex;
     gap: 7em;
     list-style: none;
+  }
+
+  li {
+    @include defaultHoverTransition;
+  }
+
+  li:hover {
+    color: $color-primary-bark-hover;
   }
 }

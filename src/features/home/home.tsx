@@ -21,6 +21,7 @@ import gsap from "gsap";
 import variables from "theme/_constants.module.scss";
 import { RemoveScroll } from "react-remove-scroll";
 import { useMediaQuery } from "react-responsive";
+import { NavLink } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
@@ -409,6 +410,10 @@ function CarouselBlock() {
       y - 150 + "px";
   };
 
+  const [carouselImagesFiltered, setCarouselImagesFiltered] = useState(
+    carouselImages[0]
+  );
+
   const slider_settings = {
     className: "center",
     dots: false,
@@ -418,6 +423,9 @@ function CarouselBlock() {
     slidesToShow: 1,
     autoplay: false,
     autoplaySpeed: 6000,
+    beforeChange: (oldIndex: number, newIndex: number) => {
+      setCarouselImagesFiltered(carouselImages[newIndex]);
+    },
     arrows: false,
     speed: 500,
     focusOnSelect: true,
@@ -435,29 +443,6 @@ function CarouselBlock() {
       },
     ],
   };
-
-  const [touchStart, setTouchStart] = React.useState(0);
-  const [touchEnd, setTouchEnd] = React.useState(0);
-
-  function handleTouchStart(e: React.TouchEvent) {
-    setTouchStart(e.targetTouches[0].clientX);
-  }
-
-  function handleTouchMove(e: React.TouchEvent) {
-    setTouchEnd(e.targetTouches[0].clientX);
-  }
-
-  function handleTouchEnd(e: React.TouchEvent) {
-    if (touchStart - touchEnd > 150) {
-      sliderRef.current.slickPrev();
-      sliderRefText.current.slickPrev();
-    }
-
-    if (touchStart - touchEnd < -150) {
-      sliderRef.current.slickNext();
-      sliderRefText.current.slickNext();
-    }
-  }
 
   return (
     <>
@@ -490,67 +475,49 @@ function CarouselBlock() {
                     handleNextSlide();
                   }
                 }}
-                // onTouchMove={(event) => {
-                //   if (!deviceIsDesktop) {
-                //     handleTouchMove(event);
-                //   }
-                // }}
-                // onTouchStart={(event) => {
-                //   if (!deviceIsDesktop) {
-                //     handleTouchStart(event);
-                //   }
-                // }}
-                // onTouchEnd={(event) => {
-                //   if (!deviceIsDesktop) {
-                //     handleTouchEnd(event);
-                //   }
-                // }}
                 alt={image.name}
               />
             );
           })}
         </Slider>
-        <Slider ref={sliderRefText} {...slider_settings}>
+        {/* <Slider ref={sliderRefText} {...slider_settings}>
           {carouselImages.map((image) => {
-            return (
-              <section
-                key={image.name}
-                className={imageInfoStyles["image-info-block"]}
+            return ( */}
+        <section
+          key={carouselImagesFiltered.name}
+          className={imageInfoStyles["image-info-block"]}
+        >
+          <div
+            className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+          >
+            <p>{`Name: ${carouselImagesFiltered.name}`}</p>
+            <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
+          </div>
+          {readMoreOpen && (
+            <>
+              <div
+                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
               >
-                <div
-                  className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
-                >
-                  <p>{`Name: ${image.name}`}</p>
-                  <p>{`Availability:  ${image.avaliability}`}</p>
-                </div>
-                {readMoreOpen && (
-                  <>
-                    <div
-                      className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
-                    >
-                      <p>{`Location: ${image.location}`}</p>
-                      <p>{`Size:  ${image.size}`}</p>
-                    </div>
-                    <div
-                      className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
-                    >
-                      <p></p>
-                      <p>{`${image.description}`}</p>
-                    </div>
-                  </>
-                )}
-                <p
-                  onClick={() => {
-                    setReadMoreOpen(!readMoreOpen);
-                  }}
-                  className={imageInfoStyles["read-more"]}
-                >
-                  {!readMoreOpen ? "Read More" : "Hide Text"}
-                </p>
-              </section>
-            );
-          })}
-        </Slider>
+                <p>{`Location: ${carouselImagesFiltered.location}`}</p>
+                <p>{`Size:  ${carouselImagesFiltered.size}`}</p>
+              </div>
+              <div
+                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
+              >
+                <p></p>
+                <p>{`${carouselImagesFiltered.description}`}</p>
+              </div>
+            </>
+          )}
+          <p
+            onClick={() => {
+              setReadMoreOpen(!readMoreOpen);
+            }}
+            className={imageInfoStyles["read-more"]}
+          >
+            {!readMoreOpen ? "Read More" : "Hide Text"}
+          </p>
+        </section>
       </section>
     </>
   );
@@ -580,12 +547,20 @@ function FormBlock() {
 function Footer() {
   return (
     <footer className={footerStyles["footer-block"]}>
-      <ThirdwayLogo />
+      <ThirdwayLogo className={footerStyles["third-way-logo"]} />
       <ul>
-        <li>Terms and Conditions</li>
-        <li>Privacy Policy</li>
-        <li>Cookie Policy</li>
-        <li>Accessibility</li>
+        <NavLink to="#terms-and-conditions">
+          <li>Terms and Conditions</li>
+        </NavLink>
+        <NavLink to="#privacy-policy">
+          <li>Privacy Policy</li>
+        </NavLink>
+        <NavLink to="#cookie-policy">
+          <li>Cookie Policy</li>
+        </NavLink>
+        <NavLink to="#accessibility">
+          <li>Accessibility</li>
+        </NavLink>
       </ul>
     </footer>
   );

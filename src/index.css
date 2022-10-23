@@ -28,3 +28,8 @@ body {
   font-stretch: normal;
   unicode-range: U+000D-FB04;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
