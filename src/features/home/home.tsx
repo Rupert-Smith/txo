@@ -317,15 +317,8 @@ function CarouselBlock() {
   const sliderRefContainer = useRef<any>(null);
 
   const sliderRef = useRef<any>(null);
-  const sliderRefText = useRef<any>(null);
-
-  const [carouselWidth, setCarouselWidth] = useState(0);
 
   const [readMoreOpen, setReadMoreOpen] = useState(false);
-
-  useEffect(() => {
-    setCarouselWidth(sliderRefContainer.current.offsetWidth);
-  }, [sliderRefContainer.current]);
 
   const carouselImages = [
     {
@@ -377,23 +370,14 @@ function CarouselBlock() {
 
   const [mouseOnCarousel, setMouseOnCarousel] = useState(false);
 
-  // const [coord, setCoord] = useState({ x: 0, y: 0 });
-  // const handleMouseMove = (event: React.MouseEvent) => {
-  //   setCoord({ x: event.screenX, y: event.screenY });
-  // };
-
   const [nextPrev, setNextPrev] = useState(false);
-
-  // let nextPrev = ;
 
   const handleNextSlide = () => {
     if (nextPrev) {
       sliderRef.current.slickNext();
-      // sliderRefText.current.slickNext();
     }
     if (!nextPrev) {
       sliderRef.current.slickPrev();
-      // sliderRefText.current.slickPrev();
     }
   };
 
@@ -412,75 +396,6 @@ function CarouselBlock() {
     document.getElementById("carouselCursor")!.style.marginLeft = x + "px";
     document.getElementById("carouselCursor")!.style.marginTop = y + "px";
   };
-
-  // document.getElementById("carouselSection").onclick = function clickEvent(
-  //   e
-  // ) {
-  //   // e = Mouse click event.
-  //   var rect = e.target.getBoundingClientRect();
-  //   var x = e.clientX - rect.left; //x position within the element.
-  //   var y = e.clientY - rect.top; //y position within the element.
-  //   console.log("Left? : " + x + " ; Top? : " + y + ".");
-  // };
-
-  /////////----------------
-  // useEffect(() => {
-  //   dragElement(document.getElementById("carouselSection"));
-  // }, []);
-
-  // function dragElement(elmnt: any) {
-  //   var pos1 = 0,
-  //     pos2 = 0,
-  //     pos3 = 0,
-  //     pos4 = 0;
-
-  //   // console.log(pos1);
-  //   // console.log(pos2);
-  //   // console.log(pos3);
-  //   // console.log(pos4);
-  //   // if (document.getElementById(elmnt.id + "header")) {
-  //   //   /* if present, the header is where you move the DIV from:*/
-  //   //   document.getElementById(elmnt.id + "header").onmouseover = dragMouseDown;
-  //   // } else {
-  //   /* otherwise, move the DIV from anywhere inside the DIV:*/
-  //   elmnt.onmouseover = dragMouseDown;
-  //   // }
-
-  //   function dragMouseDown(e: any) {
-  //     e = e || window.event;
-  //     e.preventDefault();
-  //     // get the mouse cursor position at startup:
-
-  //     pos3 = e.clientX;
-  //     pos4 = e.clientY;
-  //     document.onmouseup = closeDragElement;
-  //     // call a function whenever the cursor moves:
-  //     document.onmousemove = elementDrag;
-  //   }
-
-  //   function elementDrag(e: any) {
-  //     e = e || window.event;
-  //     e.preventDefault();
-  //     // calculate the new cursor position:
-  //     pos1 = pos3 - e.clientX;
-  //     pos2 = pos4 - e.clientY;
-  //     pos3 = e.clientX;
-  //     pos4 = e.clientY;
-
-  //     const cursorElement: any = document.getElementById("carouselCursor");
-  //     console.log(cursorElement);
-  //     // set the element's new position:
-  //     cursorElement.style.top = cursorElement.offsetTop - pos1 + "px";
-  //     cursorElement.style.left = cursorElement.offsetLeft - pos2 + "px";
-  //   }
-
-  //   function closeDragElement() {
-  //     /* stop moving when mouse button is released:*/
-  //     document.onmouseup = null;
-  //     document.onmousemove = null;
-  //   }
-  // }
-  // /////////----------------
 
   const [carouselImagesFiltered, setCarouselImagesFiltered] = useState(
     carouselImages[0]
@@ -533,7 +448,6 @@ function CarouselBlock() {
         onMouseLeave={() => {
           setMouseOnCarousel((state) => !state);
         }}
-        // onMouseMove={handleMouseMove}
       >
         {deviceIsDesktop && (
           <div
@@ -552,9 +466,6 @@ function CarouselBlock() {
             );
           })}
         </Slider>
-        {/* <Slider ref={sliderRefText} {...slider_settings}>
-          {carouselImages.map((image) => {
-            return ( */}
       </section>
       <div
         key={carouselImagesFiltered.name}
