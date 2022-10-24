@@ -23,6 +23,7 @@ import { RemoveScroll } from "react-remove-scroll";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
 import { fontSize } from "@mui/system";
+import useWindowResize from "./hooks/useWindowResize";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollToPlugin);
@@ -94,6 +95,7 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
 
   const headerItems = [
     {
+      key: "itemOne",
       title: "ENQUIRIES",
       rowOne: "General",
       rowTwo: "+44 (0) 020 3613 4733",
@@ -224,7 +226,9 @@ type EmptyScrollBlockProps = {
 };
 
 function EmptyScrollBlock({ openMobileHeader }: EmptyScrollBlockProps) {
-  const windowHeight = useRef(document.createElement("div"));
+  const windowHeight = useWindowResize()[1];
+
+  const emptyScrollBlock = useRef(document.createElement("div"));
 
   const txoLogoRef = useRef(null);
 
@@ -252,11 +256,39 @@ function EmptyScrollBlock({ openMobileHeader }: EmptyScrollBlockProps) {
     });
   }, []);
 
+  const calculateWindowPercentageVariable = () => {
+    let percentageVariable = 15.5;
+
+    if (windowHeight > 1000) {
+      percentageVariable = 17;
+    }
+
+    if (windowHeight > 1300) {
+      percentageVariable = 18;
+    }
+
+    if (windowHeight > 1400) {
+      percentageVariable = 20;
+    }
+    if (windowHeight > 1500) {
+      percentageVariable = 22;
+    }
+    if (windowHeight > 1700) {
+      percentageVariable = 25;
+    }
+
+    return percentageVariable;
+  };
+  const emptyScrollBlockHeight = Math.ceil(
+    windowHeight / calculateWindowPercentageVariable()
+  );
+
   return (
     <>
       <section
-        className={emptyScrollStyles["empty-scroll-block"]}
-        ref={windowHeight}
+        style={{ height: `${emptyScrollBlockHeight}vh` }}
+        className={`${emptyScrollStyles["empty-scroll-block"]}`}
+        ref={emptyScrollBlock}
       />
       <div
         id="pin-trigger"

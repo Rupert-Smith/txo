@@ -3,8 +3,8 @@
 
 .empty-scroll-block {
   background-color: $color-primary-cream;
-  height: 70vh;
   width: 100%;
+  height: 60vh;
 }
 
 .txo-logo {
@@ -13,4 +13,44 @@
   position: absolute;
   z-index: 1000;
   padding-left: $padding-homeContainerPadding;
+}
+
+.window-height-1100 {
+  height: 80vh;
+}
+
+.window-height-1000 {
+  height: 70vh;
+}
+
+.window-height-900 {
+  height: 60vh;
+}
+
+.window-height-800 {
+  height: 60vh;
+}
+
+.window-height-700 {
+  height: 50vh;
+}
+
+.window-height-600 {
+  height: 40vh;
+}
+
+.window-height-500 {
+  height: 30vh;
+}
+
+.window-height-400 {
+  height: 10vh;
+}
+
+.window-height-300 {
+  height: 10vh;
+}
+
+.window-height-200 {
+  height: 0vh;
 }
