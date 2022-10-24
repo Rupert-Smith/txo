@@ -36,13 +36,15 @@
   }
 }
 
+//-------
+
 .footer-block {
   display: flex;
   justify-content: space-between;
   color: $color-primary-bark;
   padding-right: 10em;
   align-items: center;
-  padding-bottom: $padding-homeContainerPadding;
+  padding-bottom: $padding-homeContainerPadding - 10px;
 
   ul {
     display: flex;
@@ -57,4 +59,16 @@
   li:hover {
     color: $color-primary-bark-hover;
   }
+}
+
+.terms-and-conditions {
+  margin-right: -1.4em;
+}
+
+.privacy-policy {
+  margin-right: 2em;
+}
+
+.cookie-policy {
+  margin-right: 2.8em;
 }

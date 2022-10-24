@@ -544,9 +544,21 @@ function FormBlock() {
       <h2>STAY UPDATED</h2>
       <form>
         <h1>Newsletter</h1>
-        <input placeholder="Full Name" type="text" />
-        <input placeholder="Company Name" type="text" />
-        <input placeholder="Email Address" type="text" />
+        <input
+          className={formStyles["full-name"]}
+          placeholder="Full Name"
+          type="text"
+        />
+        <input
+          className={formStyles["company-name"]}
+          placeholder="Company Name"
+          type="text"
+        />
+        <input
+          className={formStyles["email-address"]}
+          placeholder="Email Address"
+          type="text"
+        />
         <button
           onClick={(event) => {
             event.preventDefault();
@@ -564,13 +576,19 @@ function Footer() {
     <footer className={footerStyles["footer-block"]}>
       <ThirdwayLogo className={footerStyles["third-way-logo"]} />
       <ul>
-        <NavLink to="#terms-and-conditions">
+        <NavLink
+          className={footerStyles["terms-and-conditions"]}
+          to="#terms-and-conditions"
+        >
           <li>Terms and Conditions</li>
         </NavLink>
-        <NavLink to="#privacy-policy">
+        <NavLink
+          className={footerStyles["privacy-policy"]}
+          to="#privacy-policy"
+        >
           <li>Privacy Policy</li>
         </NavLink>
-        <NavLink to="#cookie-policy">
+        <NavLink className={footerStyles["cookie-policy"]} to="#cookie-policy">
           <li>Cookie Policy</li>
         </NavLink>
         <NavLink to="#accessibility">

@@ -30,10 +30,22 @@
   letter-spacing: $letterSpacing-desktop-medium;
 }
 
+@mixin fontSize-desktop-small-plus {
+  font-size: $fontSize-desktop-small-plus;
+  line-height: $lineHeight-desktop-small-plus;
+  letter-spacing: $letterSpacing-desktop-small-plus;
+}
+
 @mixin fontSize-desktop-small {
   font-size: $fontSize-desktop-small;
   line-height: $lineHeight-desktop-small;
   letter-spacing: $letterSpacing-desktop-small;
+}
+
+@mixin fontSize-desktop-tiny {
+  font-size: $fontSize-desktop-tiny;
+  line-height: $lineHeight-desktop-tiny;
+  letter-spacing: $letterSpacing-desktop-tiny;
 }
 
 @mixin fontSize-mobile-big {
@@ -48,8 +60,20 @@
   letter-spacing: $letterSpacing-mobile-medium;
 }
 
+@mixin fontSize-mobile-small-plus {
+  font-size: $fontSize-mobile-small-plus;
+  line-height: $lineHeight-mobile-small-plus;
+  letter-spacing: $letterSpacing-mobile-small-plus;
+}
+
 @mixin fontSize-mobile-small {
   font-size: $fontSize-mobile-small;
   line-height: $lineHeight-mobile-small;
   letter-spacing: $letterSpacing-mobile-small;
+}
+
+@mixin fontSize-mobile-tiny {
+  font-size: $fontSize-mobile-tiny;
+  line-height: $lineHeight-mobile-tiny;
+  letter-spacing: $letterSpacing-mobile-tiny;
 }

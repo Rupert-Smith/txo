@@ -7,7 +7,7 @@
 
 @media screen and (min-width: $media-query-mobile) {
   .header-items {
-    @include fontSize-mobile-small;
+    @include fontSize-mobile-tiny;
   }
 }
 
@@ -15,7 +15,7 @@
 
 @media screen and (min-width: $media-query-desktop) {
   .header-items {
-    @include fontSize-desktop-small;
+    @include fontSize-desktop-tiny;
   }
 }
 
@@ -23,7 +23,7 @@
   z-index: 100;
   color: $color-primary-bark;
   position: fixed;
-  gap: 3em;
+  gap: 3.5em;
   background-color: $color-primary-cream;
   width: 100%;
   padding-top: $padding-homeContainerPadding;
@@ -37,6 +37,7 @@
 
   li {
     list-style: none;
+    font-weight: 900;
   }
 }
 
