@@ -542,7 +542,6 @@ function CarouselBlock() {
             )}
           </>
         )}
-
         <div
           onClick={() => {
             setReadMoreOpen(!readMoreOpen);
@@ -552,6 +551,7 @@ function CarouselBlock() {
           {!readMoreOpen ? "Read More" : "Hide Text"}
         </div>
       </div>
+
       {/* <div
           className={`${imageInfoStyles["image-info-row"]} ${
             readMoreOpen
