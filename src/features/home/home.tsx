@@ -518,8 +518,16 @@ function CarouselBlock() {
               : imageInfoStyles["image-info-row-long"]
           }`}
         >
-          <div>{`Name: ${carouselImagesFiltered.name}`}</div>
-          <div>{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
+          <div
+            style={
+              deviceIsDesktop ? { fontSize: "40px" } : { fontSize: "20px" }
+            }
+          >{`Name: ${carouselImagesFiltered.name}`}</div>
+          <div
+            style={
+              deviceIsDesktop ? { fontSize: "40px" } : { fontSize: "20px" }
+            }
+          >{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
         </div>
         {readMoreOpen && (
           <>
@@ -527,9 +535,15 @@ function CarouselBlock() {
               className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
             >
               <div
+                style={
+                  deviceIsDesktop ? { fontSize: "40px" } : { fontSize: "20px" }
+                }
                 className={`${imageInfoStyles["image-info-column"]} `}
               >{`Location: ${carouselImagesFiltered.location}`}</div>
               <div
+                style={
+                  deviceIsDesktop ? { fontSize: "40px" } : { fontSize: "20px" }
+                }
                 className={`${imageInfoStyles["image-info-column"]} `}
               >{`Size:  ${carouselImagesFiltered.size}`}</div>
             </div>
