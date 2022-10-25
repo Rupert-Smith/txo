@@ -512,7 +512,14 @@ function CarouselBlock() {
           key={carouselImagesFiltered.name}
           className={imageInfoStyles["image-info-block"]}
         >
-          <div className={imageInfoStyles["two-columns"]}>
+          <div
+            className={` ${imageInfoStyles["column"]} ${
+              !readMoreOpen
+                ? imageInfoStyles["one-line-break"]
+                : imageInfoStyles["two-line-break"]
+            }
+            } ${imageInfoStyles["two-columns"]}`}
+          >
             <div>{`Name: ${carouselImagesFiltered.name}`}</div>
             <div>{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
           </div>
@@ -521,7 +528,7 @@ function CarouselBlock() {
           {readMoreOpen && (
             <>
               <div
-                className={`${imageInfoStyles["column"]}  ${imageInfoStyles["two-columns"]}`}
+                className={`${imageInfoStyles["two-line-break"]} ${imageInfoStyles["column"]}  ${imageInfoStyles["two-columns"]}`}
               >
                 <div>{`Location: ${carouselImagesFiltered.location}`}</div>
                 <div>{`Size:  ${carouselImagesFiltered.size}`}</div>
@@ -529,13 +536,13 @@ function CarouselBlock() {
 
               {deviceIsDesktop ? (
                 <div
-                  className={`${imageInfoStyles["column"]} ${imageInfoStyles["one-column"]} `}
+                  className={`${imageInfoStyles["one-line-break"]} ${imageInfoStyles["column"]} ${imageInfoStyles["one-column"]} `}
                 >
                   <div>{`${carouselImagesFiltered.description}`}</div>
                 </div>
               ) : (
                 <div
-                  className={`${imageInfoStyles["column"]} ${imageInfoStyles["two-columns"]} `}
+                  className={`${imageInfoStyles["one-line-break"]} ${imageInfoStyles["column"]} ${imageInfoStyles["two-columns"]} `}
                 >
                   <div />
                   <div>{`${carouselImagesFiltered.description}`}</div>
@@ -543,67 +550,16 @@ function CarouselBlock() {
               )}
             </>
           )}
-        </div>
-        <div
-          onClick={() => {
-            setReadMoreOpen(!readMoreOpen);
-          }}
-          className={imageInfoStyles["read-more"]}
-        >
-          {!readMoreOpen ? "Read More" : "Hide Text"}
+          <div
+            onClick={() => {
+              setReadMoreOpen(!readMoreOpen);
+            }}
+            className={`${imageInfoStyles["read-more"]}`}
+          >
+            {!readMoreOpen ? "Read More" : "Hide Text"}
+          </div>
         </div>
       </>
-
-      {/* <div
-          className={`${imageInfoStyles["image-info-row"]} ${
-            readMoreOpen
-              ? imageInfoStyles["image-info-row-short"]
-              : imageInfoStyles["image-info-row-long"]
-          }`}
-        >
-          <p>{`Name: ${carouselImagesFiltered.name}`}</p>
-          <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
-        </div>
-        {readMoreOpen && (
-          <div className={imageInfoStyles["image-info-table"]}>
-            <div
-              className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
-            >
-              <p
-                className={`${imageInfoStyles["image-info-column"]} `}
-              >{`Location: ${carouselImagesFiltered.location}`}</p>
-              <p
-                className={`${imageInfoStyles["image-info-column"]} `}
-              >{`Size:  ${carouselImagesFiltered.size}`}</p>
-            </div>
-            {deviceIsDesktop ? (
-              <div
-                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
-              >
-                <p />
-                <p
-                  className={`${imageInfoStyles["image-info-column"]} `}
-                >{`${carouselImagesFiltered.description}`}</p>
-              </div>
-            ) : (
-              <div className={`${imageInfoStyles["mobile-bottom-row"]}`}>
-                <p
-                  className={`${imageInfoStyles["image-info-column"]} `}
-                >{`${carouselImagesFiltered.description}`}</p>
-                <div className={` ${imageInfoStyles["image-info-row-long"]}`} />
-              </div>
-            )}
-          </div>
-        )}
-        <p
-          onClick={() => {
-            setReadMoreOpen(!readMoreOpen);
-          }}
-          className={imageInfoStyles["read-more"]}
-        >
-          {!readMoreOpen ? "Read More" : "Hide Text"}
-        </p>
-      </div> */}
     </>
   );
 }
