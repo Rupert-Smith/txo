@@ -8,8 +8,13 @@
 @media screen and (min-width: $media-query-mobile) {
   .image-info-block {
     @include fontSize-mobile-small;
-    p {
-      padding: 10px 0px;
+  }
+  .image-info-column {
+    padding: 10px 0px;
+  }
+  .image-info-row {
+    div {
+      padding: 14px 0px;
     }
   }
 }
@@ -19,7 +24,14 @@
 @media screen and (min-width: $media-query-desktop) {
   .image-info-block {
     @include fontSize-desktop-medium;
-    p {
+  }
+
+  .image-info-column {
+    padding: 20px 0px;
+  }
+
+  .image-info-row {
+    div {
       padding: 20px 0px;
     }
   }
@@ -33,8 +45,8 @@
   color: $color-primary-bark;
   display: flex;
   flex-direction: column;
-  margin-top: 0.35em;
-  p {
+  margin-top: 0.26em;
+  div {
     margin: 0px;
   }
 }
@@ -43,12 +55,13 @@
   display: flex;
   justify-content: space-between;
 
-  p {
+  div {
+    // padding: 20px 0px;
     width: 50%;
   }
 }
 .image-info-row-short {
-  p {
+  div {
     width: 49.4%;
     border-bottom: 1px solid $color-primary-bark;
   }
@@ -56,12 +69,13 @@
 
 .image-info-row-long {
   border-bottom: 1px solid $color-primary-bark;
-  p {
+  div {
     width: 49.4%;
   }
 }
 
 .read-more {
+  margin-top: 0.6em;
   opacity: $opacity-default;
   @include defaultHoverTransition;
 }

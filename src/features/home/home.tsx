@@ -518,27 +518,35 @@ function CarouselBlock() {
               : imageInfoStyles["image-info-row-long"]
           }`}
         >
-          <p>{`Name: ${carouselImagesFiltered.name}`}</p>
-          <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
+          <div>{`Name: ${carouselImagesFiltered.name}`}</div>
+          <div>{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
         </div>
         {readMoreOpen && (
           <>
             <div
               className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
             >
-              <p>{`Location: ${carouselImagesFiltered.location}`}</p>
-              <p>{`Size:  ${carouselImagesFiltered.size}`}</p>
+              <div
+                className={`${imageInfoStyles["image-info-column"]} `}
+              >{`Location: ${carouselImagesFiltered.location}`}</div>
+              <div
+                className={`${imageInfoStyles["image-info-column"]} `}
+              >{`Size:  ${carouselImagesFiltered.size}`}</div>
             </div>
             {deviceIsDesktop ? (
               <div
                 className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
               >
-                <p />
-                <p>{`${carouselImagesFiltered.description}`}</p>
+                <div />
+                <div
+                  className={`${imageInfoStyles["image-info-column"]} `}
+                >{`${carouselImagesFiltered.description}`}</div>
               </div>
             ) : (
               <div className={`${imageInfoStyles["mobile-bottom-row"]}`}>
-                <p>{`${carouselImagesFiltered.description}`}</p>
+                <div
+                  className={`${imageInfoStyles["image-info-column"]} `}
+                >{`${carouselImagesFiltered.description}`}</div>
                 <div className={` ${imageInfoStyles["image-info-row-long"]}`} />
               </div>
             )}
