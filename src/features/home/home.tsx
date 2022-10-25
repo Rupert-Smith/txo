@@ -173,7 +173,7 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
           {openMobileHeader && (
             <RemoveScroll>
               <div className={`${headerStyles["mobile-header-list"]}`}>
-                {headerItems.map((item) => {
+                {headerItems.map((item, index) => {
                   return (
                     <ul key={item.key}>
                       {item.mobileLineBreakTop && (
@@ -184,11 +184,19 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
                       <li
                         className={`${headerStyles["header-mobile-list-small-font"]}`}
                       />
+
                       <li
-                        className={`${headerStyles["header-mobile-title"]} ${headerStyles["header-mobile-list-small-font"]}`}
+                        className={`${
+                          index !== 1
+                            ? headerStyles["header-mobile-title"]
+                            : headerStyles[
+                                "header-mobile-title-empty-title-row"
+                              ]
+                        } ${headerStyles["header-mobile-list-small-font"]}`}
                       >
                         {item.title}
                       </li>
+
                       <li
                         className={`${headerStyles["header-mobile-list-medium-font"]}`}
                       >
@@ -237,7 +245,7 @@ function EmptyScrollBlock({ openMobileHeader }: EmptyScrollBlockProps) {
 
     gsap.to(txoLogoRefElement, {
       scale: 0.3,
-      transformOrigin: "top 20px",
+      transformOrigin: "top 0px",
       scrollTrigger: {
         start: "top top",
         end: "+=70%",
@@ -504,7 +512,11 @@ function CarouselBlock() {
         className={imageInfoStyles["image-info-block"]}
       >
         <div
-          className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
+          className={`${imageInfoStyles["image-info-row"]} ${
+            readMoreOpen
+              ? imageInfoStyles["image-info-row-short"]
+              : imageInfoStyles["image-info-row-long"]
+          }`}
         >
           <p>{`Name: ${carouselImagesFiltered.name}`}</p>
           <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
@@ -517,12 +529,21 @@ function CarouselBlock() {
               <p>{`Location: ${carouselImagesFiltered.location}`}</p>
               <p>{`Size:  ${carouselImagesFiltered.size}`}</p>
             </div>
-            <div
-              className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
-            >
-              <p></p>
-              <p>{`${carouselImagesFiltered.description}`}</p>
-            </div>
+            {deviceIsDesktop ? (
+              <div
+                className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
+              >
+                <p />
+                <p>{`${carouselImagesFiltered.description}`}</p>
+              </div>
+            ) : (
+              <>
+                <p>{`${carouselImagesFiltered.description}`}</p>
+                <div
+                  className={` ${imageInfoStyles["image-info-row-long"]}`}
+                ></div>
+              </>
+            )}
           </>
         )}
         <p

@@ -1,8 +1,25 @@
 @import "theme/constants.module.scss";
 @import "theme/mixins.scss";
 
+//------- MEDIA QUERIES ---------
+
+//------- MOBILE
+
+@media screen and (min-width: $media-query-mobile) {
+  .home-container {
+    padding: 0px $padding-homeContainerPadding-desktop;
+  }
+}
+
+//------- DESKTOP
+
+@media screen and (min-width: $media-query-desktop) {
+  .home-container {
+    padding: 0px $padding-homeContainerPadding-mobile;
+  }
+}
+
 .home-container {
-  padding: 0px $padding-homeContainerPadding;
   background-color: $color-primary-cream;
   height: 100%;
 }

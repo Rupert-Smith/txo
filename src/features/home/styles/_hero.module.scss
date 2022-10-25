@@ -6,6 +6,14 @@
 //------- MOBILE
 
 @media screen and (min-width: $media-query-mobile) {
+  .hero-block {
+    width: 100%;
+  }
+
+  .hero-subsection {
+    margin-left: 0%;
+    width: 100%;
+  }
   .hero-subtitle {
     @include fontSize-mobile-small;
   }
@@ -20,6 +28,14 @@
 //------- DESKTOP
 
 @media screen and (min-width: $media-query-desktop) {
+  .hero-block {
+    width: 90%;
+  }
+
+  .hero-subsection {
+    margin-left: 40.5%;
+    width: 50%;
+  }
   .hero-subtitle {
     @include fontSize-desktop-small;
   }
@@ -37,13 +53,10 @@
   color: $color-primary-bark;
   margin-bottom: 7em;
   padding-top: 500px;
-  width: 90%;
 }
 
 .hero-subsection {
   margin-top: 90px;
-  margin-left: 40.5%;
-  width: 50%;
 }
 
 .hero-title {

@@ -10,14 +10,28 @@
     position: absolute;
     margin-top: -5em;
     margin-left: -0.3em;
-    width: 10em;
+    width: 13em;
   }
 
   .footer-block {
+    padding-bottom: $padding-homeContainerPadding-mobile - 10px;
     ul {
-      margin-left: -4em;
+      margin-left: -2em;
+      gap: 6em;
     }
-    @include fontSize-mobile-small;
+    @include fontSize-mobile-tiny;
+  }
+
+  .terms-and-conditions {
+    margin-right: -1.4em;
+  }
+
+  .privacy-policy {
+    margin-right: 2em;
+  }
+
+  .cookie-policy {
+    margin-right: 2.8em;
   }
 }
 
@@ -32,7 +46,24 @@
   }
 
   .footer-block {
+    padding-bottom: $padding-homeContainerPadding-desktop - 10px;
     @include fontSize-desktop-small;
+
+    ul {
+      gap: 6em;
+    }
+  }
+
+  .terms-and-conditions {
+    margin-right: -1.4em;
+  }
+
+  .privacy-policy {
+    margin-right: 2em;
+  }
+
+  .cookie-policy {
+    margin-right: 2.8em;
   }
 }
 
@@ -44,11 +75,9 @@
   color: $color-primary-bark;
   padding-right: 10em;
   align-items: center;
-  padding-bottom: $padding-homeContainerPadding - 10px;
 
   ul {
     display: flex;
-    gap: 7em;
     list-style: none;
   }
 
@@ -59,16 +88,4 @@
   li:hover {
     color: $color-primary-bark-hover;
   }
-}
-
-.terms-and-conditions {
-  margin-right: -1.4em;
-}
-
-.privacy-policy {
-  margin-right: 2em;
-}
-
-.cookie-policy {
-  margin-right: 2.8em;
 }

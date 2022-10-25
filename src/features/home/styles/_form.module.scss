@@ -6,13 +6,32 @@
 //------- MOBILE
 
 @media screen and (min-width: $media-query-mobile) {
+  .form-block {
+    margin-bottom: 485px;
+  }
   .form-block form {
     margin-left: -5px;
 
     button {
       padding: 0px;
       padding-left: 6px;
+      margin-top: 50px;
     }
+  }
+
+  .full-name {
+    margin-top: -0.1em;
+    margin-bottom: -0.19em;
+  }
+
+  .company-name {
+    margin-top: -0.08em;
+    margin-bottom: -0.05em;
+  }
+
+  .email-address {
+    margin-top: -0.09em;
+    margin-bottom: -0.14em;
   }
 
   .form-block h1 {
@@ -32,12 +51,32 @@
 //------- DESKTOP
 
 @media screen and (min-width: $media-query-desktop) {
+  .form-block {
+    margin-bottom: 145px;
+  }
+
   .form-block form {
     margin-left: -10px;
 
     button {
       padding-left: 10px;
+      margin-top: 58px;
     }
+  }
+
+  .full-name {
+    margin-top: -0.06em;
+    margin-bottom: -0.19em;
+  }
+
+  .company-name {
+    margin-top: -0.05em;
+    margin-bottom: -0.05em;
+  }
+
+  .email-address {
+    margin-top: -0.05em;
+    margin-bottom: -0.05em;
   }
 
   .form-block h1 {
@@ -57,7 +96,6 @@
 
 .form-block {
   margin-top: 220px;
-  margin-bottom: 145px;
 
   * {
     color: $color-primary-bark;
@@ -85,21 +123,6 @@
     vertical-align: middle;
   }
 
-  .full-name {
-    margin-top: -0.06em;
-    margin-bottom: -0.19em;
-  }
-
-  .company-name {
-    margin-top: -0.05em;
-    margin-bottom: -0.05em;
-  }
-
-  .email-address {
-    margin-top: -0.05em;
-    margin-bottom: -0.05em;
-  }
-
   input::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: $color-primary-bark;
@@ -117,7 +140,6 @@
   }
 
   button {
-    margin-top: 58px;
     width: fit-content;
     outline-width: 0;
     @include defaultHoverTransition;

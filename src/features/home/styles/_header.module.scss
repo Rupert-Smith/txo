@@ -8,6 +8,8 @@
 @media screen and (min-width: $media-query-mobile) {
   .header-items {
     @include fontSize-mobile-tiny;
+    padding-top: $padding-homeContainerPadding-mobile;
+    padding-bottom: $padding-homeContainerPadding-mobile;
   }
 }
 
@@ -16,6 +18,8 @@
 @media screen and (min-width: $media-query-desktop) {
   .header-items {
     @include fontSize-desktop-tiny;
+    padding-top: $padding-homeContainerPadding-desktop;
+    padding-bottom: $padding-homeContainerPadding-desktop;
   }
 }
 
@@ -26,8 +30,7 @@
   gap: 3.5em;
   background-color: $color-primary-cream;
   width: 100%;
-  padding-top: $padding-homeContainerPadding;
-  padding-bottom: $padding-homeContainerPadding;
+
   justify-content: flex-end;
   display: flex;
 
@@ -79,7 +82,7 @@
   width: 60px;
   height: 45px;
   position: fixed;
-  right: 3em;
+  right: 1.3em;
   top: 0.6em;
   margin: 50px auto;
   -webkit-transform: rotate(0deg);
@@ -174,25 +177,31 @@
 }
 
 .mobile-header-line-break-top {
+  margin-top: 5.5em;
   margin-bottom: 1.5em;
   border-bottom: 1.5px solid $color-primary-bark;
   width: 95%;
 }
 
 .mobile-header-line-break-bottom {
-  margin-top: 1.5em;
+  margin-top: 2em;
   border-bottom: 1.5px solid $color-primary-bark;
   width: 95%;
 }
 
 .header-mobile-title {
-  margin-bottom: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.header-mobile-title-empty-title-row {
+  margin-top: 1.8em;
 }
 
 .txo-logo {
   height: 5em;
   width: 10.5em;
-  left: 3.4em;
+  left: 1.9em;
   position: absolute;
   top: 2.4em;
 }

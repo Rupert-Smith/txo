@@ -12,11 +12,11 @@ $fontSize-desktop-small-plus: 29px;
 $fontSize-desktop-medium: 40px; // original spec: 45px;
 $fontSize-desktop-big: 132px; // original spec:  144px;
 
-$fontSize-mobile-tiny: 10px;
-$fontSize-mobile-small: 10px;
-$fontSize-mobile-small-plus: 10px;
-$fontSize-mobile-medium: 18px;
-$fontSize-mobile-big: 102px;
+$fontSize-mobile-tiny: 15px;
+$fontSize-mobile-small: 20px;
+$fontSize-mobile-small-plus: 20px;
+$fontSize-mobile-medium: 43px;
+$fontSize-mobile-big: 134px;
 
 // ----------- LINE HEIGHT -----------
 
@@ -27,10 +27,10 @@ $lineHeight-desktop-medium: 42px; // original spec: 45px
 $lineHeight-desktop-big: 122px; // original spec: 138px
 
 $lineHeight-mobile-tiny: 10px;
-$lineHeight-mobile-small: 10px;
+$lineHeight-mobile-small: 27px;
 $lineHeight-mobile-small-plus: 10px;
-$lineHeight-mobile-medium: 19px;
-$lineHeight-mobile-big: 100px;
+$lineHeight-mobile-medium: 49px;
+$lineHeight-mobile-big: 134px;
 
 // ----------- LETTER SPACING -----------
 
@@ -43,8 +43,8 @@ $letterSpacing-desktop-big: -0.075em; // original spec: -0.05em;
 $letterSpacing-mobile-tiny: -0.045em;
 $letterSpacing-mobile-small: -0.045em;
 $letterSpacing-mobile-small-plus: -0.045em;
-$letterSpacing-mobile-medium: 0em;
-$letterSpacing-mobile-big: -0.05em;
+$letterSpacing-mobile-medium: -0.01em;
+$letterSpacing-mobile-big: -0.07em;
 
 // ----------- TRANSITIONS -----------
 
@@ -52,7 +52,8 @@ $transitions-defaultTransition: 0.2s;
 
 // ----------- PADDING -----------
 
-$padding-homeContainerPadding: 31px;
+$padding-homeContainerPadding-desktop: 31px;
+$padding-homeContainerPadding-mobile: 31px;
 
 // ----------- OPACITY -----------
 
