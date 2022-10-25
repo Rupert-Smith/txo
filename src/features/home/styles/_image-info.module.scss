@@ -25,6 +25,10 @@
   }
 }
 
+.mobile-bottom-row {
+  @include fontSize-mobile-small;
+}
+
 .image-info-block {
   color: $color-primary-bark;
   display: flex;

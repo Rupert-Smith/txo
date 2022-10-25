@@ -342,7 +342,7 @@ function HeroBlock() {
         better.
       </h1>
       <div className={heroStyles["hero-subsection"]}>
-        <h2 className={heroStyles["hero-subtitle"]}>OUR OFFERING</h2>
+        <div className={heroStyles["hero-subtitle"]}>OUR OFFERING</div>
         <p className={heroStyles["hero-paragraph"]}>
           We provide physical, pragmatic and personal business guidance. Success
           is never static. Neither are we. We’ll be your business partners for
@@ -537,12 +537,10 @@ function CarouselBlock() {
                 <p>{`${carouselImagesFiltered.description}`}</p>
               </div>
             ) : (
-              <>
+              <div className={`${imageInfoStyles["mobile-bottom-row"]}`}>
                 <p>{`${carouselImagesFiltered.description}`}</p>
-                <div
-                  className={` ${imageInfoStyles["image-info-row-long"]}`}
-                ></div>
-              </>
+                <div className={` ${imageInfoStyles["image-info-row-long"]}`} />
+              </div>
             )}
           </>
         )}
@@ -562,7 +560,7 @@ function CarouselBlock() {
 function FormBlock() {
   return (
     <section className={formStyles["form-block"]}>
-      <h2>STAY UPDATED</h2>
+      <div className={formStyles["stay-updated"]}>STAY UPDATED</div>
       <form>
         <h1>Newsletter</h1>
         <input

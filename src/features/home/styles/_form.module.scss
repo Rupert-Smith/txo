@@ -10,7 +10,7 @@
     margin-bottom: 485px;
   }
   .form-block form {
-    margin-left: -5px;
+    margin-left: -10px;
 
     button {
       padding: 0px;
@@ -37,8 +37,9 @@
   .form-block h1 {
     @include fontSize-mobile-big;
   }
-  .form-block h2 {
+  .stay-updated {
     @include fontSize-mobile-small-plus;
+    margin-bottom: 0.2em;
   }
   .form-block input {
     @include fontSize-mobile-big;
@@ -83,8 +84,10 @@
     @include fontSize-desktop-big;
   }
 
-  .form-block h2 {
+  .stay-updated {
     @include fontSize-desktop-small-plus;
+    // margin-left: 0.2em;
+    margin-bottom: 0.5em;
   }
   .form-block input {
     @include fontSize-desktop-big;
@@ -110,7 +113,7 @@
   }
 
   form {
-    margin-top: -0.4em;
+    // margin-top: -0.4em;
     display: flex;
     gap: 0em;
     flex-direction: column;
