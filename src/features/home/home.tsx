@@ -511,46 +511,87 @@ function CarouselBlock() {
         key={carouselImagesFiltered.name}
         className={imageInfoStyles["image-info-block"]}
       >
+        <div className={imageInfoStyles["two-columns"]}>
+          <div>{`Name: ${carouselImagesFiltered.name}`}</div>
+          <div>{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
+        </div>
+        <div className={` ${imageInfoStyles["line-break"]}`} />
+
+        {readMoreOpen && (
+          <>
+            <div
+              className={`${imageInfoStyles["column"]}  ${imageInfoStyles["two-columns"]}`}
+            >
+              <div>{`Location: ${carouselImagesFiltered.location}`}</div>
+              <div>{`Size:  ${carouselImagesFiltered.size}`}</div>
+            </div>
+
+            {deviceIsDesktop ? (
+              <div
+                className={`${imageInfoStyles["column"]} ${imageInfoStyles["one-column"]} `}
+              >
+                <div>{`${carouselImagesFiltered.description}`}</div>
+              </div>
+            ) : (
+              <div
+                className={`${imageInfoStyles["column"]} ${imageInfoStyles["two-columns"]} `}
+              >
+                <div />
+                <div>{`${carouselImagesFiltered.description}`}</div>
+              </div>
+            )}
+          </>
+        )}
+
         <div
+          onClick={() => {
+            setReadMoreOpen(!readMoreOpen);
+          }}
+          className={imageInfoStyles["read-more"]}
+        >
+          {!readMoreOpen ? "Read More" : "Hide Text"}
+        </div>
+      </div>
+      {/* <div
           className={`${imageInfoStyles["image-info-row"]} ${
             readMoreOpen
               ? imageInfoStyles["image-info-row-short"]
               : imageInfoStyles["image-info-row-long"]
           }`}
         >
-          <div>{`Name: ${carouselImagesFiltered.name}`}</div>
-          <div>{`Availability:  ${carouselImagesFiltered.avaliability}`}</div>
+          <p>{`Name: ${carouselImagesFiltered.name}`}</p>
+          <p>{`Availability:  ${carouselImagesFiltered.avaliability}`}</p>
         </div>
         {readMoreOpen && (
-          <>
+          <div className={imageInfoStyles["image-info-table"]}>
             <div
               className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-short"]}`}
             >
-              <div
+              <p
                 className={`${imageInfoStyles["image-info-column"]} `}
-              >{`Location: ${carouselImagesFiltered.location}`}</div>
-              <div
+              >{`Location: ${carouselImagesFiltered.location}`}</p>
+              <p
                 className={`${imageInfoStyles["image-info-column"]} `}
-              >{`Size:  ${carouselImagesFiltered.size}`}</div>
+              >{`Size:  ${carouselImagesFiltered.size}`}</p>
             </div>
             {deviceIsDesktop ? (
               <div
                 className={`${imageInfoStyles["image-info-row"]} ${imageInfoStyles["image-info-row-long"]}`}
               >
-                <div />
-                <div
+                <p />
+                <p
                   className={`${imageInfoStyles["image-info-column"]} `}
-                >{`${carouselImagesFiltered.description}`}</div>
+                >{`${carouselImagesFiltered.description}`}</p>
               </div>
             ) : (
               <div className={`${imageInfoStyles["mobile-bottom-row"]}`}>
-                <div
+                <p
                   className={`${imageInfoStyles["image-info-column"]} `}
-                >{`${carouselImagesFiltered.description}`}</div>
+                >{`${carouselImagesFiltered.description}`}</p>
                 <div className={` ${imageInfoStyles["image-info-row-long"]}`} />
               </div>
             )}
-          </>
+          </div>
         )}
         <p
           onClick={() => {
@@ -560,7 +601,7 @@ function CarouselBlock() {
         >
           {!readMoreOpen ? "Read More" : "Hide Text"}
         </p>
-      </div>
+      </div> */}
     </>
   );
 }
