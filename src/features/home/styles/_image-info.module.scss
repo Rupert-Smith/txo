@@ -16,6 +16,10 @@
     }
   }
 
+  .read-more {
+    @include fontSize-mobile-small;
+  }
+
   // .image-info-column {
   //   padding: 10px 0px;
   // }
