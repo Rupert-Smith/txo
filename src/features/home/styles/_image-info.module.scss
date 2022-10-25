@@ -8,6 +8,9 @@
 @media screen and (min-width: $media-query-mobile) {
   .image-info-block {
     @include fontSize-mobile-small;
+    * {
+      font-size: 20px !important;
+    }
   }
   .image-info-column {
     padding: 10px 0px;
@@ -24,6 +27,9 @@
 @media screen and (min-width: $media-query-desktop) {
   .image-info-block {
     @include fontSize-desktop-medium;
+    * {
+      font-size: 40px !important;
+    }
   }
 
   .image-info-column {
