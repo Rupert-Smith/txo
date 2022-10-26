@@ -36,6 +36,7 @@
 
   .form-block h1 {
     @include fontSize-mobile-big;
+    letter-spacing: $letterSpacing-mobile-big + 0.03em;
   }
   .stay-updated {
     @include fontSize-mobile-small-plus;
@@ -43,6 +44,7 @@
   }
   .form-block input {
     @include fontSize-mobile-big;
+    letter-spacing: $letterSpacing-mobile-big + 0.03em;
   }
   .form-block button {
     @include fontSize-mobile-medium;
@@ -85,6 +87,7 @@
 
   .form-block h1 {
     @include fontSize-desktop-big;
+    letter-spacing: $letterSpacing-desktop-big + 0.03em;
   }
 
   .stay-updated {
@@ -94,6 +97,7 @@
   }
   .form-block input {
     @include fontSize-desktop-big;
+    letter-spacing: $letterSpacing-desktop-big + 0.03em;
   }
   .form-block button {
     @include fontSize-desktop-medium;
@@ -123,9 +127,9 @@
   }
 
   input {
-    letter-spacing: $letterSpacing-desktop-big + 0.06em;
+    // letter-spacing: $letterSpacing-desktop-big + 0.06em;
     // text-indent: 10px;
-    line-height: $lineHeight-desktop-big;
+    line-height: 0px;
 
     padding-top: 0em;
     padding-bottom: 0em;
