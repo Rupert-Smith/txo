@@ -245,7 +245,7 @@ function EmptyScrollBlock({ openMobileHeader }: EmptyScrollBlockProps) {
 
     gsap.to(txoLogoRefElement, {
       scale: 0.3,
-      transformOrigin: "top 0px",
+      transformOrigin: "top -14px",
       scrollTrigger: {
         start: "top top",
         end: "+=70%",

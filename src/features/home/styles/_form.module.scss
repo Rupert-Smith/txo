@@ -20,18 +20,18 @@
   }
 
   .full-name {
-    margin-top: -0.1em;
-    margin-bottom: -0.19em;
+    // margin-top: -0.1em;
+    // margin-bottom: -0.19em;
   }
 
   .company-name {
-    margin-top: -0.08em;
-    margin-bottom: -0.05em;
+    // margin-top: -0.08em;
+    // margin-bottom: -0.05em;
   }
 
   .email-address {
-    margin-top: -0.09em;
-    margin-bottom: -0.14em;
+    // margin-top: -0.09em;
+    // margin-bottom: -0.14em;
   }
 
   .form-block h1 {
@@ -65,20 +65,23 @@
     }
   }
 
-  .full-name {
-    margin-top: -0.06em;
-    margin-bottom: -0.19em;
-  }
+  // .full-name {
+  //   // margin-top: -0.06em;
+  //   // margin-bottom: -0.19em;
+  //   background-color: red;
+  // }
 
-  .company-name {
-    margin-top: -0.05em;
-    margin-bottom: -0.05em;
-  }
+  // .company-name {
+  //   // margin-top: -0.05em;
+  //   // margin-bottom: -0.05em;
+  //   background-color: yellow;
+  // }
 
-  .email-address {
-    margin-top: -0.05em;
-    margin-bottom: -0.05em;
-  }
+  // .email-address {
+  //   // margin-top: -0.05em;
+  //   background-color: blue;
+  //   // margin-bottom: -0.05em;
+  // }
 
   .form-block h1 {
     @include fontSize-desktop-big;
@@ -120,14 +123,23 @@
   }
 
   input {
+    letter-spacing: $letterSpacing-desktop-big + 0.06em;
+    // text-indent: 10px;
+    // line-height: 0px;
+
+    padding-top: 0em;
+    padding-bottom: 0em;
     outline-width: 0;
     border: 0;
-    padding: 0px;
+    // padding-left: 10px;
+    // padding: 0px;
+    // padding-left: 1em;
     vertical-align: middle;
   }
 
   input::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
+
     color: $color-primary-bark;
     opacity: 0.3; /* Firefox */
   }
