@@ -125,7 +125,7 @@
   input {
     letter-spacing: $letterSpacing-desktop-big + 0.06em;
     // text-indent: 10px;
-    // line-height: 0px;
+    line-height: $lineHeight-desktop-big;
 
     padding-top: 0em;
     padding-bottom: 0em;

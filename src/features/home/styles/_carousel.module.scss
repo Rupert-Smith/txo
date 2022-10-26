@@ -3,6 +3,10 @@
 
 .carousel-image {
   cursor: none;
+
+  * {
+    pointer-events: none;
+  }
 }
 
 .custom-cursor {

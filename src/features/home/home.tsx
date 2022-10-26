@@ -15,6 +15,7 @@ import CarouselImageFive from "assets/images/carousel-images/c5.jpeg";
 import Slider from "react-slick";
 import { ReactComponent as TxoLogo } from "assets/icons/txo_logo_2.svg";
 import { ReactComponent as ThirdwayLogo } from "assets/icons/thirdway.svg";
+import { ReactComponent as HamburgerMenu } from "assets/icons/humburger-image.svg";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import gsap from "gsap";
@@ -154,21 +155,29 @@ function Header({ openMobileHeader, setOpenMobileHeader }: HeaderProps) {
         <div ref={headerRefMobile}>
           <header className={`${headerStyles["mobile-header-container"]}`}>
             {openMobileHeader && (
-              <TxoLogo className={headerStyles["txo-logo"]} />
+              <TxoLogo
+                className={`${headerStyles["txo-logo"]} ${headerStyles["txo-logo-span"]}`}
+              />
             )}
-            <div
-              onClick={() => {
-                setOpenMobileHeader(!openMobileHeader);
-              }}
-              className={`${headerStyles["mobile-header-button"]} ${
-                openMobileHeader ? headerStyles["open"] : ""
-              }`}
-            >
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
+
+            <>
+              <div
+                onClick={() => {
+                  setOpenMobileHeader(!openMobileHeader);
+                }}
+                className={`${headerStyles["mobile-header-button"]} ${
+                  openMobileHeader ? headerStyles["open"] : ""
+                }`}
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+              {/* <HamburgerMenu
+                className={`${headerStyles["txo-logo"]} ${headerStyles["txo-logo-svg"]}`}
+              /> */}
+            </>
           </header>
           {openMobileHeader && (
             <RemoveScroll>
@@ -482,11 +491,13 @@ function CarouselBlock() {
         className={carouselStyles["carousel-image"]}
         id="carouselSection"
         ref={sliderRefContainer}
-        onMouseEnter={() => {
-          setMouseOnCarousel((state) => !state);
+        onMouseOver={() => {
+          console.log("enter ");
+          setMouseOnCarousel((state) => true);
         }}
         onMouseLeave={() => {
-          setMouseOnCarousel((state) => !state);
+          console.log("leave ");
+          setMouseOnCarousel((state) => false);
         }}
       >
         {deviceIsDesktop && (

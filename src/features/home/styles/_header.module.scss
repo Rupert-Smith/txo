@@ -63,7 +63,7 @@
 
 .mobile-menu-line {
   list-style: none;
-  width: 60px;
+  width: 55px;
   border-bottom: 1.5px solid $color-primary-bark;
 }
 
@@ -79,10 +79,10 @@
 }
 
 .mobile-header-button {
-  width: 75px;
+  width: 70px;
   height: 45px;
   position: fixed;
-  right: 2em;
+  right: 2.3em;
   top: 0em;
   margin: 50px auto;
   -webkit-transform: rotate(0deg);
@@ -99,7 +99,8 @@
 .mobile-header-button span {
   display: block;
   position: fixed;
-  height: 1.5px;
+  height: 2px;
+
   width: 100%;
   background: $color-primary-bark;
   border-radius: 2px;
@@ -121,15 +122,15 @@
 
 .mobile-header-button span:nth-child(2),
 .mobile-header-button span:nth-child(3) {
-  top: 27px;
+  top: 28px;
 }
 
 .mobile-header-button span:nth-child(4) {
-  top: 50px;
+  top: 52px;
 }
 
 .mobile-header-button.open span:nth-child(1) {
-  top: 27px;
+  top: 28px;
   width: 0%;
   left: 50%;
 }
@@ -149,7 +150,7 @@
 }
 
 .mobile-header-button.open span:nth-child(4) {
-  top: 27px;
+  top: 28px;
   width: 0%;
   left: 50%;
 }
@@ -200,9 +201,18 @@
 }
 
 .txo-logo {
+  position: absolute;
+}
+
+.txo-logo-svg {
+  right: 2.4em;
+  top: 2.4em;
+  width: 4.3em;
+}
+
+.txo-logo-span {
   height: 5em;
   width: 10.5em;
   left: 1.9em;
-  position: absolute;
   top: 2.4em;
 }
